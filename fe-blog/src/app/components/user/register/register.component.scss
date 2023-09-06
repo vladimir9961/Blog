@@ -1,0 +1,21 @@
+@import "variables";
+.center-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.custom-form {
+  border: 1px solid $seccondary-color;
+  padding: 20px;
+  border-radius: 10px;
+  background: $seccondary-color;
+  border-radius: 10px;
+  width: 320px;
+  .custom-btn-primary {
+    @extend .btn-primary;
+  }
+  .invalid-feedback {
+    display: block;
+  }
+}
