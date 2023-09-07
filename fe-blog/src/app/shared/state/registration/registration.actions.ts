@@ -1,7 +1,7 @@
 // actions.ts
 import { createAction, props } from '@ngrx/store';
 import { UserData } from '../../models/userData';
-import { User } from '../../models/user';
+import { User } from '../../models/login/user';
 
 export const register = createAction(
   '[Registration] Register',

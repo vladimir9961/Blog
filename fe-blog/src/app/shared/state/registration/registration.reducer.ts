@@ -8,6 +8,7 @@ export interface RegistrationState {
   username: string;
   loading: boolean;
   error: string | null;
+  success: boolean;
 }
 
 export const initialState: RegistrationState = {
@@ -16,6 +17,7 @@ export const initialState: RegistrationState = {
   username: '',
   loading: false,
   error: null,
+  success: false,
 };
 
 export const registrationReducer = createReducer(
@@ -24,14 +26,17 @@ export const registrationReducer = createReducer(
     ...state,
     loading: true,
     error: null,
+    success: false,
   })),
   on(RegistrationActions.registerSuccess, (state) => ({
     ...state,
     loading: false,
+    success: true,
   })),
   on(RegistrationActions.registerFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,
+    success: false,
   }))
 );

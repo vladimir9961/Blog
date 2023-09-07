@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as RegistrationActions from '../../../shared/store/registration/registration.actions'; // Replace 'path-to-registration.actions' with the actual path to your registration actions file.
+import * as RegistrationActions from '../../../shared/state/registration/registration.actions'; // Replace 'path-to-registration.actions' with the actual path to your registration actions file.
 import { UserData } from 'src/app/shared/models/userData';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { UserData } from 'src/app/shared/models/userData';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   emailForm = new FormGroup({
     username: new FormControl('', [
@@ -33,9 +34,9 @@ export class RegisterComponent {
         email: this.emailForm.value.email as string,
         password: this.emailForm.value.password as string,
       };
-
       this.store.dispatch(RegistrationActions.register({ userData }));
 
+      this.router.navigate(['/login']);
       this.emailForm.reset();
     }
   }

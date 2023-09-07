@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="container center-form">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="loginForm" class="custom-form">
+        <!-- Add formGroup directive -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            formControlName="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            formControlName="password"
+          />
+        </div>
+        <button type="submit" (click)="onSubmit()" class="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
