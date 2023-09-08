@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { RegistrationState } from './registration.reducer'; // Adjust the import path
+import { RegistrationState } from './initialRegistrationState';
 
 // Create a feature selector for the registration state
 export const selectRegistrationState =

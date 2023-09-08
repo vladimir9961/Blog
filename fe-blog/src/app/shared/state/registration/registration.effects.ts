@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as RegistrationActions from './registration.actions';
-import { RegistrationService } from '../../service/registration-service.service';
+import { RegistrationService } from '../../service/register/registration-service.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 

@@ -26,7 +26,6 @@ export class LogginEffects {
             return loginActions.loginSuccess({ user });
           }),
           catchError((error) => {
-            // Log any errors
             console.error('HTTP Error:', error);
             return of(loginActions.loginFailure({ error }));
           })

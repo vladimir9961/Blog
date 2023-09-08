@@ -26,7 +26,7 @@ export class LoginComponent {
       this.router.navigate(['/home']);
       this.store.dispatch(LoginActions.login({ userData }));
 
-      // this.loginForm.reset();
+      this.loginForm.reset();
     }
   }
 }
