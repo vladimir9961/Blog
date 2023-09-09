@@ -4,7 +4,6 @@ import { userLogin } from 'src/app/shared/models/login/userLogin';
 import * as LoginActions from '../../../shared/state/login/login.actions';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +21,6 @@ export class LoginComponent {
         email: this.loginForm.value.email as string,
         password: this.loginForm.value.password as string,
       };
-      console.log(userData);
       this.router.navigate(['/home']);
       this.store.dispatch(LoginActions.login({ userData }));
 

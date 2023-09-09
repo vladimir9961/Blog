@@ -11,3 +11,7 @@ export const loadBlogsFailure = createAction(
   '[Blog] Load Blogs Failure',
   props<{ error: string }>()
 );
+export const loadBlogsByUserId = createAction(
+  '[Blog] Load Blogs By User Id',
+  props<{ userId: string }>()
+);

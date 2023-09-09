@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken"); // You'll need a library for handling JSON Web Tokens
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 const User = mongoose.model("User");
@@ -34,8 +34,12 @@ router.post("/login", async (req, res) => {
         }
       );
 
-      // Return the token as a response
-      res.status(200).json({ message: "Authentication successful", token });
+      // Return the token and userId as a response
+      res.status(200).json({
+        message: "Authentication successful",
+        userId: user._id,
+        token,
+      });
     } else {
       res.status(401).json({ message: "Authentication failed" });
     }

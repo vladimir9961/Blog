@@ -16,8 +16,20 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { blogReducer } from './shared/state/blogs/blogs.reducer';
 import { BlogEffects } from './shared/state/blogs/blogs.effects';
+import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { AddBlogEffects } from './shared/state/add-blog/addBlog.effects';
+import { newBlogReducer } from './shared/state/add-blog/addBlog.reducer';
+import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, BlogsComponent, NavbarComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    BlogsComponent,
+    NavbarComponent,
+    AddBlogComponent,
+    AddBlogComponent,
+    EditBlogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,8 +40,14 @@ import { BlogEffects } from './shared/state/blogs/blogs.effects';
       register: registrationReducer,
       login: loginReducer,
       blogs: blogReducer,
+      newBlog: newBlogReducer,
     }),
-    EffectsModule.forRoot([RegistrationEffects, LogginEffects, BlogEffects]),
+    EffectsModule.forRoot([
+      RegistrationEffects,
+      LogginEffects,
+      BlogEffects,
+      AddBlogEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

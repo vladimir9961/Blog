@@ -1,19 +1,28 @@
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col d-flex justify-content-center flex-wrap">
       <div
-        class="card"
+        class="card m-2"
         *ngFor="let blog of blogs$ | async"
         style="width: 18rem"
       >
         <img
           [src]="'http://localhost:3000' + blog.imageUrl"
           class="card-img-top"
-          alt="..."
+          alt="{{ blog.title }}"
         />
         <div class="card-body">
           <h5 class="card-title">{{ blog.title }}</h5>
           <p class="card-text">{{ blog.content }}</p>
+        </div>
+        <div *ngIf="blog.userId == userId">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="goToEditPage(blog._id)"
+          >
+            Edit
+          </button>
         </div>
       </div>
     </div>

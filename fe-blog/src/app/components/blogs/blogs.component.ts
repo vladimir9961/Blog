@@ -4,6 +4,7 @@ import { Blog } from 'src/app/shared/state/blogs/BlogsInitialState';
 import { Observable } from 'rxjs';
 import * as BlogActions from '../../shared/state/blogs/blogs.actions';
 import * as BlogSelectors from '../../shared/state/blogs/blogs.selectors';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -13,14 +14,20 @@ export class BlogsComponent implements OnInit {
   blogs$: Observable<Blog[]>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
+  userId: string | null;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private router: Router) {
     this.blogs$ = this.store.select(BlogSelectors.selectBlogs);
     this.loading$ = this.store.select(BlogSelectors.selectLoading);
     this.error$ = this.store.select(BlogSelectors.selectError);
+    this.userId = localStorage.getItem('userId');
   }
 
   ngOnInit(): void {
     this.store.dispatch(BlogActions.loadBlogs());
+  }
+  goToEditPage(id: string): void {
+    console.log(id);
+    this.router.navigate(['/edit-blog/:' + id]);
   }
 }

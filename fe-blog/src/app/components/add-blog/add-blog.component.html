@@ -1,0 +1,31 @@
+<div class="container center-form">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="addPost" class="custom-form">
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            formControlName="title"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Content</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputPassword1"
+            formControlName="content"
+          />
+        </div>
+        <input type="file" (change)="onImageSelected($event)" />
+
+        <button type="submit" (click)="onSubmit()" class="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -20,13 +20,9 @@ export class RegistrationEffects {
       switchMap(({ userData }) =>
         this.registrationService.register(userData).pipe(
           map((user) => {
-            // Log the response
-            console.log('HTTP Response:', user);
-
             return RegistrationActions.registerSuccess({ user });
           }),
           catchError((error) => {
-            // Log any errors
             console.error('HTTP Error:', error);
             return of(RegistrationActions.registerFailure({ error }));
           })
