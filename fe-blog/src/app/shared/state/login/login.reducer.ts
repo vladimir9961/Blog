@@ -8,9 +8,10 @@ export const loginReducer = createReducer(
     ...state,
     status: 'loading',
   })),
-  on(LoginActions.loginSuccess, (state) => ({
+  on(LoginActions.loginSuccess, (state, { email, token }) => ({
     ...state,
-    status: state,
+    email,
+    token,
     loading: false,
     success: true,
   })),
@@ -19,5 +20,12 @@ export const loginReducer = createReducer(
     loading: false,
     error,
     success: false,
+  })),
+  on(LoginActions.logout, (state) => ({
+    ...state,
+    userId: null,
+    token: null,
+    loading: false,
+    error: null,
   }))
 );

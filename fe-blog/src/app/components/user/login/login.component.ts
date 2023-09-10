@@ -22,7 +22,12 @@ export class LoginComponent {
         password: this.loginForm.value.password as string,
       };
       this.router.navigate(['/home']);
-      this.store.dispatch(LoginActions.login({ userData }));
+      this.store.dispatch(
+        LoginActions.login({
+          email: userData.email,
+          password: userData.password,
+        })
+      );
 
       this.loginForm.reset();
     }
