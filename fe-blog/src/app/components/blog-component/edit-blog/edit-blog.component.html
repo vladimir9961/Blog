@@ -1,0 +1,11 @@
+<div class="container d-flex justify-content-center">
+  <div class="card" *ngIf="blog$ | async as blog" style="width: 18rem">
+    <img [src]="'http://localhost:3000' + blog.imageUrl" alt="Blog Image" />
+    <div class="card-body">
+      <h5 class="card-title">{{ blog.title }}</h5>
+      <p class="card-text">{{ blog.content }}</p>
+      <input type="text" value="{{ blog.title }}" />
+      <button class="btn btn-primary" (click)="saveBlog()">Save</button>
+    </div>
+  </div>
+</div>

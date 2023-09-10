@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as AddBlogActions from './addBlog.actions';
-import { AddBlogService } from '../../service/blogs/add-blog.service';
+import { AddBlogService } from 'src/app/shared/service/blogs/add-blog.service';
 
 @Injectable()
 export class AddBlogEffects {

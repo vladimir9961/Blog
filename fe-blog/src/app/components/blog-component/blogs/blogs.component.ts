@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Blog } from 'src/app/shared/state/blogs/BlogsInitialState';
+import { Blog } from 'src/app/shared/state/blog/blogs/BlogsInitialState';
 import { Observable } from 'rxjs';
-import * as BlogActions from '../../shared/state/blogs/blogs.actions';
-import * as BlogSelectors from '../../shared/state/blogs/blogs.selectors';
+import * as BlogActions from '../../../shared/state/blog/blogs/blogs.actions';
+import * as BlogSelectors from '../../../shared/state/blog/blogs/blogs.selectors';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-blogs',
@@ -28,6 +28,6 @@ export class BlogsComponent implements OnInit {
   }
   goToEditPage(id: string): void {
     console.log(id);
-    this.router.navigate(['/edit-blog/:' + id]);
+    this.router.navigate(['/posts/' + id]);
   }
 }

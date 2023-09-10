@@ -20,7 +20,7 @@ export const selectError = createSelector(
 );
 
 export const selectFilteredBlogs = createSelector(selectBlogs, (blogs) => {
-  const userId = localStorage.getItem('userId'); // Get userId from localStorage
+  const userId = localStorage.getItem('userId');
   if (!userId) {
     return [];
   }

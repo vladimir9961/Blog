@@ -3,7 +3,7 @@ const router = express.Router();
 const PostModel = require("../../models/PostsModal"); // Import your Mongoose model for posts
 
 // DELETE a post by ID
-router.delete("/api/posts/:postId", async (req, res) => {
+router.delete("/posts/:postId", async (req, res) => {
   const postId = req.params.postId;
 
   try {

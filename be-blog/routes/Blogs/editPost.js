@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.put(
-  "/api/posts/:postId",
+  "/posts/:postId",
   verifyToken,
   upload.single("image"), // Use the 'upload' middleware to handle file uploads
   async (req, res) => {

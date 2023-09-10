@@ -30,7 +30,7 @@ router.post("/login", async (req, res) => {
         },
         "your-secret-key", // Replace with a strong secret key
         {
-          expiresIn: "1h", // Token expires in 1 hour (adjust as needed)
+          expiresIn: "12h", // Token expires in 1 hour (adjust as needed)
         }
       );
 

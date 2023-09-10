@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as AddBlogActions from '../../shared//state/add-blog/addBlog.actions';
+import * as AddBlogActions from '../../../shared/state/blog/add-blog/addBlog.actions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({

@@ -6,7 +6,7 @@ const GeolocationModel = require("../../models/GeolocationModel ");
 const verifyToken = require("../../middleware/authMiddleware");
 router.use(cors());
 // Create a GET endpoint to fetch posts data from MongoDB
-router.get("/api/posts", async (req, res) => {
+router.get("/posts", async (req, res) => {
   try {
     // Fetch all posts from the MongoDB collection
     const posts = await PostModel.find();
@@ -18,7 +18,7 @@ router.get("/api/posts", async (req, res) => {
     res.status(500).json({ error: "An error occurred" });
   }
 });
-router.get("/api/geolocation", async (req, res) => {
+router.get("/geolocation", async (req, res) => {
   try {
     const geolocation = await GeolocationModel.find();
     res.json(geolocation);

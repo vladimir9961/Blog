@@ -24,42 +24,37 @@ const upload = multer({
   limits: { fileSize: 400000 },
 });
 // Create a POST endpoint to add data to posts.json
-router.post(
-  "/api/posts",
-  verifyToken,
-  upload.single("image"),
-  async (req, res) => {
-    try {
-      // Handle image file (req.file) here as needed
-      const imageUrl = req.file ? "/images/" + req.file.filename : null;
+router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
+  try {
+    // Handle image file (req.file) here as needed
+    const imageUrl = req.file ? "/images/" + req.file.filename : null;
 
-      // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
-      const userId = req.user.userId;
+    // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
+    const userId = req.user.userId;
 
-      // Create a new post document with the associated user ID
-      const newPost = new PostModel({
-        title: req.body.title,
-        content: req.body.content,
-        imageUrl: imageUrl,
-        userId: userId, // Associate the post with the logged-in user
-      });
+    // Create a new post document with the associated user ID
+    const newPost = new PostModel({
+      title: req.body.title,
+      content: req.body.content,
+      imageUrl: imageUrl,
+      userId: userId, // Associate the post with the logged-in user
+    });
 
-      // Save the new post to the MongoDB collection
-      const savedPost = await newPost.save();
+    // Save the new post to the MongoDB collection
+    const savedPost = await newPost.save();
 
-      res.json({
-        message: "Post added successfully",
-        postId: savedPost._id, // Assuming _id is the generated ID
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "An error occurred" });
-    }
+    res.json({
+      message: "Post added successfully",
+      postId: savedPost._id, // Assuming _id is the generated ID
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred" });
   }
-);
+});
 
 // Create a POST endpoint to add data to geolocation collection in MongoDB
-router.post("/api/geolocation", async (req, res) => {
+router.post("/geolocation", async (req, res) => {
   try {
     // Create a new geolocation document
     const newLocation = new GeolocationModel({
