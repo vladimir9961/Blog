@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import * as BlogSelector from '../../../shared/state/blog/edit-blog/editBlog.selectors';
-import {
-  editPost,
-  getPost,
-} from 'src/app/shared/state/blog/edit-blog/editBlog.actions';
+import * as BlogSelector from '../state/edit-blog/editBlog.selectors';
+
 import { Observable } from 'rxjs';
 import { Blog } from 'src/app/shared/models/blog.model';
+import { editPost, getPost } from '../state/edit-blog/editBlog.actions';
 
 @Component({
   selector: 'app-edit-blog',

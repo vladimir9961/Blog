@@ -15,9 +15,10 @@ export class AddBlogEffects {
   addBlog$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AddBlogActions.addBlog),
-      switchMap((action) =>
-        this.addBlogService.createBlog(action).pipe(
+      switchMap((action) => {
+        return this.addBlogService.createBlog(action, 'awfa').pipe(
           map((response) => {
+            console.log(response);
             return AddBlogActions.addBlogSuccess({
               message: response.message,
               postId: response.postId,
@@ -26,8 +27,8 @@ export class AddBlogEffects {
           catchError((error) =>
             of(AddBlogActions.addBlogFailure({ error: error.message }))
           )
-        )
-      )
+        );
+      })
     )
   );
 }

@@ -11,14 +11,16 @@ export class AddBlogService {
 
   constructor(private http: HttpClient) {}
 
-  createBlog(data: {
-    title: string;
-    content: string;
-    image: File;
-    token: string;
-  }): Observable<any> {
+  createBlog(
+    data: {
+      title: string;
+      content: string;
+      image: File;
+    },
+    token: string
+  ): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `${data.token}`,
+      Authorization: `${token}`,
     });
 
     const formData = new FormData();

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Blog } from 'src/app/shared/state/blog/blogs/BlogsInitialState';
 import { Observable } from 'rxjs';
-import * as BlogActions from '../../../shared/state/blog/blogs/blogs.actions';
-import * as BlogSelectors from '../../../shared/state/blog/blogs/blogs.selectors';
+import * as BlogActions from '../state/blogs/blogs.actions';
+import * as BlogSelectors from '../state/blogs/blogs.selectors';
 import { Router } from '@angular/router';
+import { Blog } from 'src/app/shared/models/blog.model';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',

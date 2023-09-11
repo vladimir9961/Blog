@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as AddBlogActions from '../../../shared/state/blog/add-blog/addBlog.actions';
+import * as AddBlogActions from '../state/add-blog/addBlog.actions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
@@ -32,10 +32,8 @@ export class AddBlogComponent {
       const imageFile = this.addPost.get('image')?.value as File | null;
 
       if (imageFile instanceof File) {
-        const token = localStorage.getItem('token') || '';
-
         this.store.dispatch(
-          AddBlogActions.addBlog({ title, content, image: imageFile, token })
+          AddBlogActions.addBlog({ title, content, image: imageFile })
         );
         this.router.navigateByUrl('/home');
       } else {

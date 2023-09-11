@@ -1,4 +1,6 @@
-export interface LoginState {
+import { User } from '../../../shared/models/login/user.model';
+
+export interface UserState {
   email: string | null;
   password: string;
   token: string | null;
@@ -6,7 +8,7 @@ export interface LoginState {
   error: string | null;
   success: boolean;
 }
-export const initialState: LoginState = {
+export const initialState: UserState = {
   email: null,
   password: '',
   token: null,
@@ -15,6 +17,5 @@ export const initialState: LoginState = {
   success: false,
 };
 export interface AuthState {
-  userId: string | null;
-  token: string | null;
+  user: User | null;
 }

@@ -4,7 +4,7 @@ import { of, tap } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
 import * as BlogActions from './blogs.actions';
-import { BlogsService } from '../../../service/blogs/blogs.service';
+import { BlogsService } from 'src/app/shared/service/blogs/blogs.service';
 
 @Injectable()
 export class BlogEffects {
@@ -16,7 +16,6 @@ export class BlogEffects {
       mergeMap(() =>
         this.blogService.getBlogs().pipe(
           map((blogs) => {
-            console.log(blogs);
             return BlogActions.loadBlogsSuccess({ blogs });
           }),
           catchError((error) =>
