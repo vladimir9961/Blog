@@ -27,18 +27,24 @@ router.post("/login", async (req, res) => {
         {
           userId: user._id,
           email: user.email,
+          username: user.username, // Dodajte korisničko ime u token
         },
         "your-secret-key", // Replace with a strong secret key
         {
-          expiresIn: "12h", // Token expires in 1 hour (adjust as needed)
+          expiresIn: "12h", // Token ističe za 12 sati (prilagodite po potrebi)
         }
       );
 
-      // Return the token and userId as a response
+      // Izračunajte vreme isteka tokena
+      const expirationTime = new Date().getTime() + 12 * 60 * 60 * 1000; // 12 sati u milisekundama
+
+      // Return the token, userId, username, and expiration time as a response
       res.status(200).json({
         message: "Authentication successful",
         userId: user._id,
+        username: user.username, // Dodajte korisničko ime u odgovor
         token,
+        expiresIn: expirationTime, // Dodajte vreme isteka tokena u odgovor
       });
     } else {
       res.status(401).json({ message: "Authentication failed" });
