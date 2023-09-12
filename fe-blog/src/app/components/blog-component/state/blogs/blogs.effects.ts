@@ -16,6 +16,7 @@ export class BlogEffects {
       mergeMap(() =>
         this.blogService.getBlogs().pipe(
           map((blogs) => {
+            localStorage.setItem('blogs', JSON.stringify(blogs));
             return BlogActions.loadBlogsSuccess({ blogs });
           }),
           catchError((error) =>

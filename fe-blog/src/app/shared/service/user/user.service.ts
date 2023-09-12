@@ -7,7 +7,7 @@ import { User } from '../../models/login/user.model';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class UserService {
   timeoutInterval: any;
   private apiUrl = environment.apiUrl;
 
@@ -62,6 +62,14 @@ export class LoginService {
       );
       this.runTimeoutInterval(user);
       return user;
+    }
+    return null;
+  }
+  getUserId() {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      return userData.userId;
     }
     return null;
   }

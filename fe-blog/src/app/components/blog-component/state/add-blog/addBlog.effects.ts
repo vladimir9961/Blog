@@ -18,7 +18,6 @@ export class AddBlogEffects {
       switchMap((action) => {
         return this.addBlogService.createBlog(action, 'awfa').pipe(
           map((response) => {
-            console.log(response);
             return AddBlogActions.addBlogSuccess({
               message: response.message,
               postId: response.postId,

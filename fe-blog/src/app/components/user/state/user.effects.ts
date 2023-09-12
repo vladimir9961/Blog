@@ -11,7 +11,7 @@ import { of, tap } from 'rxjs';
 import * as loginActions from './user.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { LoginService } from '../../../shared/service/user/user.service';
+import { UserService } from '../../../shared/service/user/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../../shared/models/login/user.model';
 
@@ -19,7 +19,7 @@ import { User } from '../../../shared/models/login/user.model';
 export class LogginEffects {
   constructor(
     private actions$: Actions<Action>,
-    private loginService: LoginService,
+    private loginService: UserService,
     private router: Router
   ) {}
 

@@ -3,6 +3,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { blogReducer } from './blogs.reducer';
 import { BlogEffects } from './blogs.effects';
+import { BlogResolver } from '../../blogs/blogs.resolver';
 
 @NgModule({
   imports: [
@@ -10,5 +11,6 @@ import { BlogEffects } from './blogs.effects';
     EffectsModule.forFeature([BlogEffects]),
   ],
   declarations: [],
+  providers: [BlogResolver],
 })
 export class blogStateModule {}

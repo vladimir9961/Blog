@@ -7,6 +7,7 @@ export const loadBlogsSuccess = createAction(
   '[Blog] Load Blogs Success',
   props<{ blogs: Blog[] }>()
 );
+
 export const loadBlogsFailure = createAction(
   '[Blog] Load Blogs Failure',
   props<{ error: string }>()
