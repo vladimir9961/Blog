@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const ImageModel = require("../../models/imageModel");
+const ImageModel = require("./imageModel");
 const postSchema = new mongoose.Schema({
   title: String,
   content: String,
