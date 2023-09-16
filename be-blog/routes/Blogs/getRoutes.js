@@ -8,6 +8,25 @@ router.get("/posts", async (req, res) => {
     // Fetch all posts from the MongoDB collection, uključujući i komentare
     const posts = await PostModel.find().populate("comments"); // Korišćenje populate za uključivanje komentara
 
+    const postsWithUsername = await Promise.all(
+      posts.map(async (post) => {
+        const user = await UserModel.findById(post.userId);
+        console.log(
+          `Username for post with title "${post.title}": ${user.username}`
+        );
+        return {
+          title: post.title,
+          content: post.content,
+          imageUrl: post.imageUrl,
+          username: user.username, // Dodajte korisničko ime u rezultat
+          likes: post.likes,
+          comments: post.comments,
+          dislikes: post.dislikes,
+        };
+      })
+    );
+
+    console.log(postsWithUsername);
     // Return the posts as JSON response
     res.json(posts);
   } catch (error) {
