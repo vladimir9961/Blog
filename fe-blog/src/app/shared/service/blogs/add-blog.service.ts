@@ -15,7 +15,6 @@ export class AddBlogService {
     data: {
       title: string;
       content: string;
-      image: File;
     },
     token: string
   ): Observable<any> {
@@ -26,8 +25,6 @@ export class AddBlogService {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('content', data.content);
-    formData.append('image', data.image, data.image.name);
-
-    return this.http.post(`${this.apiUrl}/posts`, formData, { headers });
+    return this.http.post(`${this.apiUrl}/posts`, data, { headers });
   }
 }

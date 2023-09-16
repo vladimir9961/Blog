@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 export const addBlog = createAction(
   '[Blog] Add Blog',
-  props<{ title: string; content: string; image: File }>()
+  props<{ title: string; content: string }>()
 );
 
 export const addBlogSuccess = createAction(

@@ -6,11 +6,6 @@
         *ngFor="let blog of blogs$ | async"
         style="width: 18rem"
       >
-        <img
-          [src]="'https://erin-awful-turkey.cyclic.cloud' + blog.imageUrl"
-          class="card-img-top"
-          alt="{{ blog.title }}"
-        />
         <div class="card-body">
           <h5 class="card-title">{{ blog.title }}</h5>
           <p class="card-text">{{ blog.content }}</p>

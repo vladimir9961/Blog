@@ -16,8 +16,11 @@ export class AddBlogEffects {
     this.actions$.pipe(
       ofType(AddBlogActions.addBlog),
       switchMap((action) => {
-        return this.addBlogService.createBlog(action, 'awfa').pipe(
+        return this.addBlogService.createBlog(action, 'asdas').pipe(
           map((response) => {
+            localStorage.removeItem('blogs');
+            window.location.reload();
+
             return AddBlogActions.addBlogSuccess({
               message: response.message,
               postId: response.postId,
