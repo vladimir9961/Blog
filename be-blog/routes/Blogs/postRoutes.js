@@ -41,7 +41,7 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     const newPost = new PostModel({
       title: req.body.title, // Dobijamo naslov iz tela zahteva
       content: req.body.content, // Dobijamo sadržaj iz tela zahteva
-      imageUrl: upload.imageUrl, //
+      imageUrl: { data: req.body.filename, contentType: "image/jpg" },
       userId: userId, // Associate the post with the logged-in user
     });
 
