@@ -3,14 +3,11 @@ const router = express.Router();
 const PostModel = require("../../models/PostsModal");
 const verifyToken = require("../../middleware/authMiddleware");
 
-// Your Google Cloud Storage configuration remains the same
-// ...
-
 router.post("/posts", verifyToken, async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    // You can create a new post without handling image upload here
+    // Kreirajte novi post sa poljem createdAt
     const newPost = new PostModel({
       title: req.body.title,
       content: req.body.content,
@@ -22,15 +19,12 @@ router.post("/posts", verifyToken, async (req, res) => {
     res.json({
       message: "Post added successfully",
       postId: savedPost._id,
+      createdAt: savedPost.createdAt, // Uključite createdAt u odgovor
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred" });
   }
 });
-
-// ...
-
-// Add the rest of your route code as needed
 
 module.exports = router;

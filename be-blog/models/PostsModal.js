@@ -29,6 +29,10 @@ const postSchema = new mongoose.Schema({
       },
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now, // Postavi trenutno vreme kao podrazumevanu vrednost
+  },
 });
 
 module.exports = mongoose.model("Post", postSchema);
