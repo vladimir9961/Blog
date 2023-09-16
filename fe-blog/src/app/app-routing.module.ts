@@ -8,7 +8,7 @@ import { BlogResolver } from './components/blog-component/blogs/blogs.resolver';
 import { MapComponent } from './components/map/map.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/map', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
     component: HomeComponent,
