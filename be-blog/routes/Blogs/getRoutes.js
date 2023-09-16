@@ -25,7 +25,7 @@ router.get("/posts", async (req, res) => {
           dislikes: post.dislikes,
           userId: post.userId,
           post_id: post._id,
-          created_at: post.created_at,
+          created_at: post.createdAt,
         };
       })
     );
