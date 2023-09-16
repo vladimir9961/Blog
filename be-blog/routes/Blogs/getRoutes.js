@@ -12,9 +12,6 @@ router.get("/posts", async (req, res) => {
     const postsWithUsername = await Promise.all(
       posts.map(async (post) => {
         const user = await UserModel.findById(post.userId);
-        console.log(
-          `Username for post with title "${post.title}": ${user.username}`
-        );
         return {
           title: post.title,
           content: post.content,
@@ -30,7 +27,6 @@ router.get("/posts", async (req, res) => {
       })
     );
 
-    console.log(postsWithUsername);
     // Return the posts as JSON response
     res.json(postsWithUsername);
   } catch (error) {

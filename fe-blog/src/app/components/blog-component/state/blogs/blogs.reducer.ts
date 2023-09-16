@@ -13,7 +13,10 @@ const initialState: BlogState = {
   loading: false,
   error: null,
 };
-
+const initialStateLike = {
+  blogId: '',
+  loading: false,
+};
 export const blogReducer = createReducer(
   initialState,
   on(BlogActions.loadBlogs, (state) => ({
@@ -29,5 +32,12 @@ export const blogReducer = createReducer(
     ...state,
     error,
     loading: false,
+  }))
+);
+export const likeReducer = createReducer(
+  initialStateLike,
+  on(BlogActions.likeBlog, (state) => ({
+    ...state,
+    loading: true,
   }))
 );
