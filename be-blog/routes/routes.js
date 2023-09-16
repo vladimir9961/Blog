@@ -10,6 +10,7 @@ const getPostById = require("./Blogs/getBlogById");
 const likePost = require("./Blogs/likePost");
 const commentPost = require("./Blogs/commentPost");
 const addImage = require("./Blogs/addImage");
+const getImage = require("./Blogs/getImage");
 
 router.use(getRoutes);
 router.use(postRoutes);
@@ -19,6 +20,7 @@ router.use(getPostById);
 router.use(likePost);
 router.use(commentPost);
 router.use(addImage);
+router.use(getImage);
 
 //Users
 const userRoutes = require("./userRoutes");
