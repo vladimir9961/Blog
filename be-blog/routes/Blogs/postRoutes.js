@@ -19,10 +19,10 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 400000 },
-});
+// const upload = multer({
+//   storage,
+//   limits: { fileSize: 400000 },
+// });
 
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
@@ -30,7 +30,7 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
-    const ImageModel = require("../../models/imageModel");
+    const ImageModel = require("../../models/ImageModel");
     console.log("Binary image data:", image); // Dodajte ovu liniju za prikaz binarnih podataka slike
     const newImage = new ImageModel({
       data: req.file.buffer,
