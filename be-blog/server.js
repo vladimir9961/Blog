@@ -5,7 +5,11 @@ const path = require("path");
 const cors = require("cors");
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:4200", // Dodajte svoj lokalni URL
+};
+
+app.use(cors(corsOptions));
 app.use("/public", express.static(path.join(__dirname)));
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
