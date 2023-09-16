@@ -12,15 +12,14 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Check if the request origin is in the allowedOrigins array
       if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow the request
+        callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS")); // Block the request
+        callback(new Error("Not allowed by CORS"));
       }
     },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // Enable credentials (e.g., cookies)
+    credentials: true,
   })
 );
 app.use(function (req, res, next) {
