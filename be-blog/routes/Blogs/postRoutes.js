@@ -6,6 +6,7 @@ const GeolocationModel = require("../../models/GeolocationModel ");
 const verifyToken = require("../../middleware/authMiddleware");
 router.use(cors());
 router.use(express.json());
+const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
