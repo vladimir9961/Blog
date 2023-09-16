@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
+const ImageModel = require("../../models/imageModel");
 const postSchema = new mongoose.Schema({
   title: String,
   content: String,
-  imageUrl: {
-    data: Buffer, // Store binary image data
-    contentType: String, // Store the content type of the image (e.g., "image/jpeg")
-  },
+  imageUrl: ImageModel,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
