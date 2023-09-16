@@ -21,8 +21,6 @@ router.post("/login", async (req, res) => {
     // Compare the provided password with the stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
-    // ...
-
     if (passwordMatch) {
       // Generate a JSON Web Token (JWT) to represent the user's session
       const token = jwt.sign(
@@ -51,8 +49,6 @@ router.post("/login", async (req, res) => {
     } else {
       res.status(401).json({ message: "Authentication failed" });
     }
-
-    // ...
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Login failed" });
