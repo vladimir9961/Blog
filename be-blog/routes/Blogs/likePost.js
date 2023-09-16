@@ -24,11 +24,9 @@ router
       );
 
       if (alreadyLiked) {
-        return res
-          .status(400)
-          .json({
-            error: "Korisnik je već lajkovao ili dislajkovao ovaj post.",
-          });
+        return res.status(400).json({
+          error: "Korisnik je već lajkovao ili dislajkovao ovaj post.",
+        });
       }
 
       // Ako je isLike true, dodajte lajk, inače dodajte dislajk
@@ -46,7 +44,12 @@ router
         .json({ message: "Post je lajkovan/dislajkovan.", success: true });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Došlo je do greške." });
+      res
+        .status(500)
+        .json({
+          error: "Došlo je do greške prilikom lajkiranja posta.",
+          details: error.message,
+        });
     }
   })
   .delete(verifyToken, async (req, res) => {
