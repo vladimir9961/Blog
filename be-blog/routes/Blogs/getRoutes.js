@@ -6,10 +6,13 @@ const PostModel = require("../../models/PostsModal");
 router.get("/posts", async (req, res) => {
   try {
     // Fetch all posts from the MongoDB collection, uključujući i komentare
-    const posts = await PostModel.find().populate("comments").populate({
-      path: "user", // Pretpostavka: polje za korisnika u modelu Post se zove "user"
-      select: "username", // Odaberite samo polje "username" iz modela User
-    });
+    const posts = await PostModel.find()
+      .populate("comments")
+      .populate({
+        path: "user", // Pretpostavka: polje za korisnika u modelu Post se zove "user"
+        select: "username", // Odaberite samo polje "username" iz modela User
+      })
+      .select("-__v"); // Izostavite "__v" polje iz rezultata
 
     // Return the posts as JSON response
     res.json(posts);

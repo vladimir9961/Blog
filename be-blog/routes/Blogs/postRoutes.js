@@ -14,7 +14,6 @@ router.post("/posts", verifyToken, async (req, res) => {
     const newPost = new PostModel({
       title: req.body.title,
       content: req.body.content,
-      // You can add other fields here if needed
       userId: userId,
     });
 
