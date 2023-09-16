@@ -23,11 +23,13 @@ const upload = multer({
   storage,
   limits: { fileSize: 400000 },
 });
-// Create a POST endpoint to add data to posts.json
+
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
-    // Handle image file (req.file) here as needed
-    const imageUrl = req.file ? "/images/" + req.file.filename : null;
+    // Koristite binarne podatke slike iz req.file.buffer
+    const image = req.file ? req.file.buffer : null;
+
+    console.log("Binary image data:", image); // Dodajte ovu liniju za prikaz binarnih podataka slike
 
     // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
@@ -36,7 +38,7 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     const newPost = new PostModel({
       title: req.body.title,
       content: req.body.content,
-      imageUrl: imageUrl,
+      imageUrl: image, // Koristite binarne podatke slike umesto imageUrl
       userId: userId, // Associate the post with the logged-in user
     });
 
@@ -52,6 +54,8 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "An error occurred" });
   }
 });
+
+// ...
 
 // Create a POST endpoint to add data to geolocation collection in MongoDB
 router.post("/geolocation", async (req, res) => {
