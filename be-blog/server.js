@@ -7,7 +7,7 @@ const cors = require("cors");
 app.use(express.json());
 const corsOptions = {
   origin: [
-    "https://iridescent-mooncake-4e334b.netlify.app/",
+    "https://iridescent-mooncake-4e334b.netlify.app",
     "https://blog-neon-eight-32.vercel.app",
     "http://localhost:4200",
   ],
