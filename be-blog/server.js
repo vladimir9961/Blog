@@ -6,7 +6,7 @@ const cors = require("cors");
 
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:4200", // Dodajte svoj lokalni URL
+  origin: "http://localhost:3000", // Dodajte svoj lokalni URL
   optionsSuccessStatus: 200,
 };
 
