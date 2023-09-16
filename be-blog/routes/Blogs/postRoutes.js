@@ -24,10 +24,12 @@ const upload = multer({
   limits: { fileSize: 400000 },
 });
 // Create a POST endpoint to add data to posts.json
+// ...
+
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
     // Handle image file (req.file) here as needed
-    const imageUrl = req.file ? "/images/" + req.file.filename : null;
+    const imageUrl = req.file ? "/images/" + req.file.filename : ""; // Prazan string ako nema slike
 
     // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
@@ -52,6 +54,8 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "An error occurred" });
   }
 });
+
+// ...
 
 // Create a POST endpoint to add data to geolocation collection in MongoDB
 router.post("/geolocation", async (req, res) => {
