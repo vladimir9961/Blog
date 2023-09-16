@@ -24,10 +24,10 @@ const upload = multer({
   limits: { fileSize: 400000 },
 });
 // Create a POST endpoint to add data to posts.json
-router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
+router.post("/posts", verifyToken, async (req, res) => {
   try {
-    // Handle image file (req.file) here as needed
-    const imageUrl = req.file ? "/images/" + req.file.filename : null;
+    // Handle base64 encoded image here
+    const base64Image = req.body.image; // Pretpostavljamo da klijent šalje base64 sliku
 
     // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
@@ -36,7 +36,7 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     const newPost = new PostModel({
       title: req.body.title,
       content: req.body.content,
-      imageUrl: imageUrl,
+      image: base64Image, // Smeštamo base64 sliku
       userId: userId, // Associate the post with the logged-in user
     });
 
