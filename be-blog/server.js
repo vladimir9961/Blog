@@ -6,10 +6,10 @@ const cors = require("cors");
 
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:4200", // Dodajte svoj lokalni URL
+  origin: "https://blog-tan-ten-60.vercel.app/", // Dodajte svoj lokalni URL
   optionsSuccessStatus: 200,
 };
-
+app.use(cors(corsOptions));
 app.use(function (req, res, next) {
   //Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
