@@ -41,12 +41,14 @@ router.post(
         title: req.body.title,
         content: req.body.content,
         image: {
-          data: image, // Store binary image data
-          contentType: req.file.mimetype, // Store the content type of the image
+          data: fs.readFileSync(
+            path.join(__dirname + "/uploads/" + req.file.filename)
+          ),
+          contentType: "image/jpg", // Store the content type of the image
         },
         userId: userId, // Associate the post with the logged-in user
       });
-
+      PostModel.create(obj);
       // Save the new post to the MongoDB collection
       const savedPost = await newPost.save();
 
