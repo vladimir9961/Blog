@@ -3,10 +3,6 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-// ...
-
-// POST ruta za otpremanje slika (već imate ovu rutu)
-
 // GET ruta za dohvat slika po imenu
 router.get("/images/:imageName", (req, res) => {
   try {
