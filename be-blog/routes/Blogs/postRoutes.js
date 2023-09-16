@@ -7,6 +7,7 @@ const verifyToken = require("../../middleware/authMiddleware");
 router.use(cors());
 router.use(express.json());
 
+const upload = require("multer")();
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -15,7 +16,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-const upload = multer({ storage: storage });
+
 // Create a POST endpoint to add data to posts.json
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
