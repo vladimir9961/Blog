@@ -18,7 +18,7 @@ export class AddBlogEffects {
       switchMap((action) => {
         return this.addBlogService.createBlog(action, 'asdas').pipe(
           map((response) => {
-            // localStorage.removeItem('blogs');
+            localStorage.removeItem('blogs');
             // window.location.reload();
 
             return AddBlogActions.addBlogSuccess({
