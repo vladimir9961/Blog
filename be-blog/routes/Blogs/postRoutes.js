@@ -10,7 +10,7 @@ const path = require("path");
 router.use(cors());
 
 // Konfiguracija Google Cloud Storage klijenta
-const keyFilePath = path.resolve(__dirname, "../../myKey");
+const keyFilePath = path.resolve(__dirname, "../../myKey.json");
 const storage = new Storage({
   projectId: "blogs-399215",
   keyFilename: keyFilePath, // Putanja do JSON datoteke sa ključem za autentifikaciju
