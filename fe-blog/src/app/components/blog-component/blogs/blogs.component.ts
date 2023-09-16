@@ -5,7 +5,7 @@ import * as BlogSelectors from '../state/blogs/blogs.selectors';
 import { Router } from '@angular/router';
 import { Blog } from 'src/app/shared/models/blog.model';
 import { UserService } from 'src/app/shared/service/user/user.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -33,7 +33,6 @@ export class BlogsComponent implements OnInit {
       console.log(blogsSelect);
     });
   }
-
   goToEditPage(id: string): void {
     console.log(id);
     this.router.navigate(['/posts/' + id]);

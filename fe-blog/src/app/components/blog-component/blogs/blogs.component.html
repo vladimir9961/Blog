@@ -1,24 +1,40 @@
 <div class="container">
-  <div class="row">
-    <div class="col d-flex justify-content-center flex-wrap">
-      <div
-        class="card m-2"
-        *ngFor="let blog of blogs$ | async"
-        style="width: 18rem"
-      >
-        <div class="card-body">
-          <h5 class="card-title">{{ blog.title }}</h5>
-          <p class="card-text">{{ blog.content }}</p>
+  <div class="card" *ngFor="let blog of blogs$ | async">
+    <div class="card__header">
+      <img
+        src="https://source.unsplash.com/600x400/?car,automobile"
+        alt="card__image"
+        class="card__image"
+        width="600"
+      />
+    </div>
+    <div class="card__body">
+      <span class="tag tag-red">Automobile</span>
+      <h4 class="card-title">{{ blog.title }}</h4>
+      <p>
+        {{ blog.content }}
+      </p>
+    </div>
+    <div class="card__footer">
+      <div class="user">
+        <img
+          src="https://i.pravatar.cc/40?img=3"
+          alt="user__image"
+          class="user__image"
+        />
+        <div class="user__info">
+          <h5>{{ blog.username }}</h5>
+          <small>{{ blog.created_at }}</small>
         </div>
-        <div *ngIf="blog.userId == userId">
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="goToEditPage(blog._id)"
-          >
-            Edit
-          </button>
-        </div>
+      </div>
+      <div *ngIf="blog.userId == userId" class="edit-btn">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="goToEditPage(blog._id)"
+        >
+          Edit
+        </button>
       </div>
     </div>
   </div>

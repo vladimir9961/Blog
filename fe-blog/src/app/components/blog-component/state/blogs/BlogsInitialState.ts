@@ -4,4 +4,6 @@ export interface Blog {
   content: string;
   imageUrl: string;
   userId: string;
+  username: string;
+  created_at: string;
 }
