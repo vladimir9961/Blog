@@ -6,19 +6,18 @@ const cors = require("cors");
 
 app.use(express.json());
 const corsOptions = {
-  origin: "https://blog-tan-ten-60.vercel.app/", // Dodajte svoj lokalni URL
+  origin: "https://blog-tan-ten-60.vercel.app", // Remove the trailing slash
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 app.use(function (req, res, next) {
-  //Enabling CORS
+  // Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type"
-  ),
-    "Accept, x-client-key, x-client-token, x-client-secret, Authorization";
+    "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
+  ); // Make sure this line is within res.header() method
   next();
 });
 app.use("/public", express.static(path.join(__dirname)));
