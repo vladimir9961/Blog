@@ -1,29 +1,30 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public/images"); // Specify the local storage directory
-  },
-  filename: function (req, file, cb) {
-    const timestamp = Date.now();
-    const filename = timestamp + "-" + file.originalname;
-    cb(null, filename);
-  },
-});
+const upload = multer(); // Create a multer instance without specifying storage
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 400000 }, // Limit the file size as needed
-});
-router.post("/upload-image", upload.single("image"), (req, res) => {
+// Import your MongoDB models or configure MongoDB connection here
+
+router.post("/upload-image", upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    // Return the path to the uploaded image
-    res.json({ imageUrl: req.file.path });
+    // Assuming you have a MongoDB model for storing images
+    const ImageModel = require("../../models/ImageModel");
+
+    // Create a new image document with the binary data from req.file.buffer
+    const newImage = new ImageModel({
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
+    });
+
+    // Save the image to MongoDB
+    const savedImage = await newImage.save();
+
+    // Return the ID of the saved image in the response
+    res.json({ imageId: savedImage._id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred" });
