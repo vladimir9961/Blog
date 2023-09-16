@@ -6,8 +6,7 @@ const cors = require("cors");
 
 app.use(express.json());
 const allowedOrigins = [
-  "http://iridescent-mooncake-4e334b.netlify.app",
-  "https://blog-neon-eight-32.vercel.app",
+  "https://blog-five-pi-59.vercel.app",
   "http://localhost:4200",
 ];
 app.use(
