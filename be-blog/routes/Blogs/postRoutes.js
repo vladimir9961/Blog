@@ -3,51 +3,70 @@ const router = express.Router();
 const cors = require("cors");
 const multer = require("multer");
 const PostModel = require("../../models/PostsModal");
-const GeolocationModel = require("../../models/GeolocationModel ");
+const GeolocationModel = require("../../models/GeolocationModel");
 const verifyToken = require("../../middleware/authMiddleware");
+const { Storage } = require("@google-cloud/storage");
+
 router.use(cors());
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public/images");
-  },
-  filename: function (req, file, cb) {
-    const timestamp = Date.now();
-    const filename = timestamp + "-" + file.originalname;
-    cb(null, filename);
-  },
+// Konfiguracija Google Cloud Storage klijenta
+const storage = new Storage({
+  projectId: "blogs-399215",
+  keyFilename: "myKey", // Putanja do JSON datoteke sa ključem za autentifikaciju
 });
+
+const bucketName = "storage-blogs-images"; // Ime vašeg GCS Bucket-a
+
 const upload = multer({
-  storage,
-  limits: { fileSize: 400000 }, // Postavite ovde ograničenje za veličinu datoteke
+  storage: multer.memoryStorage(), // Ovo je bitno, koristiće memoriju za čuvanje privremenih fajlova
+  limits: { fileSize: 400000 },
 });
+
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
-    // Koristite binarne podatke slike iz req.file.buffer
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    console.log("Binary image data:", req.file.buffer); // Prikaz binarnih podataka slike
-
-    // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
 
-    // Create a new post document with the associated user ID
-    const newPost = new PostModel({
-      title: req.body.title,
-      content: req.body.content,
-      imageUrl: req.file.buffer, // Koristite binarne podatke slike umesto imageUrl
-      userId: userId, // Associate the post with the logged-in user
+    // Otpremite sliku na GCS Bucket
+    const bucket = storage.bucket(bucketName);
+    const filename = Date.now() + "-" + req.file.originalname;
+    const file = bucket.file(filename);
+
+    const stream = file.createWriteStream({
+      metadata: {
+        contentType: req.file.mimetype,
+      },
     });
 
-    // Save the new post to the MongoDB collection
-    const savedPost = await newPost.save();
-
-    res.json({
-      message: "Post added successfully",
-      postId: savedPost._id, // Assuming _id is the generated ID
+    stream.on("error", (err) => {
+      console.error("Error uploading image to GCS:", err);
+      res.status(500).json({ error: "An error occurred" });
     });
+
+    stream.on("finish", async () => {
+      // Slika je uspešno otpremljena na GCS
+      // Sada možete da kreirate novi post sa URL-om slike iz GCS-a
+      const imageUrl = `https://storage.googleapis.com/${bucketName}/${filename}`;
+
+      const newPost = new PostModel({
+        title: req.body.title,
+        content: req.body.content,
+        imageUrl: imageUrl,
+        userId: userId,
+      });
+
+      const savedPost = await newPost.save();
+
+      res.json({
+        message: "Post added successfully",
+        postId: savedPost._id,
+      });
+    });
+
+    stream.end(req.file.buffer);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred" });
@@ -56,31 +75,6 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
 
 // ...
 
-// Create a POST endpoint to add data to geolocation collection in MongoDB
-router.post("/geolocation", async (req, res) => {
-  try {
-    // Create a new geolocation document
-    const newLocation = new GeolocationModel({
-      // Include other data from the request body
-      // Example fields: latitude, longitude, name, etc.
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
-      name: req.body.name,
-    });
-
-    // Save the new location to the MongoDB collection
-    const savedLocation = await newLocation.save();
-
-    res.json({
-      message: "Geolocation added successfully",
-      locationId: savedLocation._id, // Assuming _id is the generated ID
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "An error occurred" });
-  }
-});
-
-// Add more POST routes if needed
+// Dodajte ostatak vašeg koda za rute kao što je ranije
 
 module.exports = router;
