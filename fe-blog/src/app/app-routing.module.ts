@@ -18,11 +18,6 @@ const routes: Routes = [
   { path: 'new-post', component: AddBlogComponent, canActivate: [AuthGuard] },
   { path: 'posts/:id', component: EditBlogComponent },
   { path: 'map', component: MapComponent },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./components/user/user.module').then((m) => m.UserModule),
-  },
 ];
 
 @NgModule({
