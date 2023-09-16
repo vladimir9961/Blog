@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const PostModel = require("../../models/PostsModal");
-const UserModel = require("../../models/UserModal"); // Uvezite UserModel
+const UserModel = require("../../models/UserModel");
 
 // Create a GET endpoint to fetch posts data from MongoDB
 router.get("/posts", async (req, res) => {
