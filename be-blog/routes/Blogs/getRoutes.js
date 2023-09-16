@@ -19,7 +19,7 @@ router.get("/posts", async (req, res) => {
           title: post.title,
           content: post.content,
           imageUrl: post.imageUrl,
-          username: user.username, // Dodajte korisničko ime u rezultat
+          username: user.username,
           likes: post.likes,
           comments: post.comments,
           dislikes: post.dislikes,
