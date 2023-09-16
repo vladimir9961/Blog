@@ -29,7 +29,7 @@ router.get("/posts", async (req, res) => {
 
     console.log(postsWithUsername);
     // Return the posts as JSON response
-    res.json(posts);
+    res.json(postsWithUsername);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred" });
