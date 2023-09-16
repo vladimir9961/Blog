@@ -15,7 +15,7 @@ export const selectEmail = createSelector(selectLoginState, (state) => state);
 
 export const selectUsername = createSelector(
   selectLoginState,
-  (state) => state
+  (state) => state.user
 );
 
 export const selectPassword = createSelector(

@@ -28,7 +28,11 @@ export class BlogsComponent implements OnInit {
     this.userId = this.userService.getUserId();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.blogs$.subscribe((blogsSelect) => {
+      console.log(blogsSelect);
+    });
+  }
 
   goToEditPage(id: string): void {
     console.log(id);
