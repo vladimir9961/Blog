@@ -6,10 +6,7 @@ const PostModel = require("../../models/PostsModal");
 router.get("/posts", async (req, res) => {
   try {
     // Fetch all posts from the MongoDB collection, uključujući i komentare
-    const posts = await PostModel.find().populate("comments").populate({
-      path: "user", // Pretpostavka: polje za korisnika u modelu Post se zove "user"
-      select: "username", // Odaberite samo polje "username" iz modela User
-    });
+    const posts = await PostModel.find().populate("comments"); // Korišćenje populate za uključivanje komentara
 
     // Return the posts as JSON response
     res.json(posts);
@@ -18,7 +15,6 @@ router.get("/posts", async (req, res) => {
     res.status(500).json({ error: "An error occurred" });
   }
 });
-
 // router.get("/geolocation", async (req, res) => {
 //   try {
 //     const geolocation = await GeolocationModel.find();
