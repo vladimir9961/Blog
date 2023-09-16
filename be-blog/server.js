@@ -5,15 +5,25 @@ const path = require("path");
 const cors = require("cors");
 
 app.use(express.json());
-const corsOptions = {
-  origin: [
-    "http://iridescent-mooncake-4e334b.netlify.app",
-    "https://blog-neon-eight-32.vercel.app",
-    "http://localhost:4200",
-  ],
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+const allowedOrigins = [
+  "http://iridescent-mooncake-4e334b.netlify.app",
+  "https://blog-neon-eight-32.vercel.app",
+  "http://localhost:4200",
+];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Check if the request origin is in the allowedOrigins array
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error("Not allowed by CORS")); // Block the request
+      }
+    },
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Enable credentials (e.g., cookies)
+  })
+);
 app.use(function (req, res, next) {
   // Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
