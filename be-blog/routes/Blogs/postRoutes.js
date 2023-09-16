@@ -5,6 +5,7 @@ const multer = require("multer");
 const PostModel = require("../../models/PostsModal");
 const verifyToken = require("../../middleware/authMiddleware");
 const { Storage } = require("@google-cloud/storage");
+const path = require("path");
 
 router.use(cors());
 
