@@ -11,7 +11,7 @@ router.get("/posts", async (req, res) => {
     // Iterirajte kroz postove i za svaki post pronađite korisnika po userId
     const postsWithUsername = await Promise.all(
       posts.map(async (post) => {
-        const user = await UserModel.findById(post.userId);
+        const user = await PostModel.findById(post.userId);
         return {
           title: post.title,
           content: post.content,
