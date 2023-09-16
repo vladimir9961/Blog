@@ -3,7 +3,6 @@ const router = express.Router();
 const cors = require("cors");
 const multer = require("multer");
 const PostModel = require("../../models/PostsModal");
-const GeolocationModel = require("../../models/GeolocationModel");
 const verifyToken = require("../../middleware/authMiddleware");
 const { Storage } = require("@google-cloud/storage");
 
