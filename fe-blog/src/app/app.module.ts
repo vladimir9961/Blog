@@ -13,7 +13,11 @@ import { AddBlogComponent } from './components/blog-component/add-blog/add-blog.
 import { StoreModule } from '@ngrx/store';
 import { MainStateModule } from './components/MainState.module';
 import { EffectsModule } from '@ngrx/effects';
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  LocationStrategy,
+} from '@angular/common';
 import { EditBlogComponent } from './components/blog-component/edit-blog/edit-blog.component';
 import { AuthTokenInterceptor } from './shared/service/AuthToken.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,6 +52,7 @@ import { MatMenuModule } from '@angular/material/menu';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })
