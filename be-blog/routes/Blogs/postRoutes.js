@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const multer = require("multer");
-const upload = multer();
 const PostModel = require("../../models/PostsModal");
 const GeolocationModel = require("../../models/GeolocationModel ");
 const verifyToken = require("../../middleware/authMiddleware");
@@ -18,7 +17,10 @@ const storage = multer.diskStorage({
     cb(null, filename);
   },
 });
-
+const upload = multer({
+  storage,
+  limits: { fileSize: 400000 }, // Postavite ovde ograničenje za veličinu datoteke
+});
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
     // Koristite binarne podatke slike iz req.file.buffer
