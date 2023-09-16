@@ -23,13 +23,13 @@ const upload = multer({
   storage,
   limits: { fileSize: 400000 },
 });
-// Create a POST endpoint to add data to posts.json
-// ...
 
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
     // Koristite binarne podatke slike iz req.file.buffer
     const image = req.file ? req.file.buffer : null;
+
+    console.log("Binary image data:", image); // Dodajte ovu liniju za prikaz binarnih podataka slike
 
     // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
