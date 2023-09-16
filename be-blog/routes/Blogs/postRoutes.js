@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const fs = require("fs");
 const multer = require("multer");
+const bodyParser = require("body-parser");
 const PostModel = require("../../models/PostsModal");
 const GeolocationModel = require("../../models/GeolocationModel ");
 const verifyToken = require("../../middleware/authMiddleware");
 router.use(cors());
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/images");
