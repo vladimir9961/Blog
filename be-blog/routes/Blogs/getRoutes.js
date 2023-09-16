@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const cors = require("cors");
 const PostModel = require("../../models/PostsModal");
 const verifyToken = require("../../middleware/authMiddleware");
-router.use(cors());
 // Create a GET endpoint to fetch posts data from MongoDB
 router.get("/posts", async (req, res) => {
   try {

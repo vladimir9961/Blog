@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const cors = require("cors");
 const PostModel = require("../../models/PostsModal");
 const verifyToken = require("../../middleware/authMiddleware");
-
-router.use(cors());
 
 // Your Google Cloud Storage configuration remains the same
 // ...
