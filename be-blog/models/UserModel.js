@@ -12,6 +12,6 @@ const UserSchema = mongoose.Schema(
 );
 
 // Create the UserModel based on the schema
-const UserModel = mongoose.model("Blogs", UserSchema);
+const UserModel = mongoose.model("User", UserSchema); // Ispravite ime modela na "User"
 
 module.exports = UserModel;
