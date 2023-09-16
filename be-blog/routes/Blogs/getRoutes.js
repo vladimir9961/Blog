@@ -8,8 +8,8 @@ router.use(cors());
 // Create a GET endpoint to fetch posts data from MongoDB
 router.get("/posts", async (req, res) => {
   try {
-    // Fetch all posts from the MongoDB collection
-    const posts = await PostModel.find();
+    // Fetch all posts from the MongoDB collection, uključujući i komentare
+    const posts = await PostModel.find().populate("comments"); // Korišćenje populate za uključivanje komentara
 
     // Return the posts as JSON response
     res.json(posts);

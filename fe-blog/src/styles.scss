@@ -1,6 +1,12 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "variables";
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 body {
   background-color: $tertiary-color;
+  padding-top: 56px;
 }
