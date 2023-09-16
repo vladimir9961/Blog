@@ -2,13 +2,11 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const multer = require("multer");
-const bodyParser = require("body-parser");
 const PostModel = require("../../models/PostsModal");
 const GeolocationModel = require("../../models/GeolocationModel ");
 const verifyToken = require("../../middleware/authMiddleware");
 router.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/images");
@@ -41,14 +39,12 @@ router.post(
         title: req.body.title,
         content: req.body.content,
         image: {
-          data: fs.readFileSync(
-            path.join(__dirname + "/uploads/" + req.file.filename)
-          ),
-          contentType: "image/jpg", // Store the content type of the image
+          data: image, // Store binary image data
+          contentType: req.file.mimetype, // Store the content type of the image
         },
         userId: userId, // Associate the post with the logged-in user
       });
-      PostModel.create(obj);
+
       // Save the new post to the MongoDB collection
       const savedPost = await newPost.save();
 
