@@ -6,7 +6,7 @@ const cors = require("cors");
 
 app.use(express.json());
 const corsOptions = {
-  origin: "https://blog-tan-ten-60.vercel.app", // Remove the trailing slash
+  origin: ["https://blog-tan-ten-60.vercel.app", "http://localhost:4200"],
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));

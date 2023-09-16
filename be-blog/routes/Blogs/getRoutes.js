@@ -1,16 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const PostModel = require("../../models/PostsModal");
-const verifyToken = require("../../middleware/authMiddleware");
 // Create a GET endpoint to fetch posts data from MongoDB
-const cors = require("cors");
 
-app.use(express.json());
-const corsOptions = {
-  origin: "https://blog-tan-ten-60.vercel.app", // Remove the trailing slash
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
 router.get("/posts", async (req, res) => {
   try {
     // Fetch all posts from the MongoDB collection, uključujući i komentare
