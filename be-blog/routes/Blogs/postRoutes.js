@@ -28,8 +28,9 @@ const upload = multer({
 
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
-    // Handle image file (req.file) here as needed
-    const imageUrl = req.file ? "/images/" + req.file.filename : ""; // Prazan string ako nema slike
+    // Koristi imageUrl iz tela zahteva, ako postoji, inače koristi generisanu vrednost od Multer-a
+    const imageUrl =
+      req.body.imageUrl || (req.file ? "/images/" + req.file.filename : "");
 
     // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
