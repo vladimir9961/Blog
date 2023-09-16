@@ -38,7 +38,7 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     const newPost = new PostModel({
       title: req.body.title,
       content: req.body.content,
-      image: image, // Koristite binarne podatke slike umesto imageUrl
+      imageUrl: image, // Koristite binarne podatke slike umesto imageUrl
       userId: userId, // Associate the post with the logged-in user
     });
 
