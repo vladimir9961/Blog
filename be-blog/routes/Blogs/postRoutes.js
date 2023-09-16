@@ -9,9 +9,10 @@ const { Storage } = require("@google-cloud/storage");
 router.use(cors());
 
 // Konfiguracija Google Cloud Storage klijenta
+const keyFilePath = path.resolve(__dirname, "../../myKey");
 const storage = new Storage({
   projectId: "blogs-399215",
-  keyFilename: "../../myKey", // Putanja do JSON datoteke sa ključem za autentifikaciju
+  keyFilename: keyFilePath, // Putanja do JSON datoteke sa ključem za autentifikaciju
 });
 
 const bucketName = "storage-blogs-images"; // Ime vašeg GCS Bucket-a
