@@ -23,6 +23,8 @@ router.get("/posts", async (req, res) => {
           likes: post.likes,
           comments: post.comments,
           dislikes: post.dislikes,
+          userId: post.userId,
+          post_id: post._id,
         };
       })
     );
