@@ -11,7 +11,7 @@ router.post("/upload-image", upload.single("image"), async (req, res) => {
     }
 
     // Assuming you have a MongoDB model for storing images
-    const ImageModel = require("../../models/imageModel");
+    // const ImageModel = require("../../models/imageModel");
 
     // Create a new image document with the binary data from req.file.buffer
     const newImage = new ImageModel({
