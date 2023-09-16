@@ -30,7 +30,7 @@ router.post("/posts/:postId/like", verifyToken, async (req, res) => {
     await post.save();
 
     // Vratite odgovor sa statusom 200 ili odgovarajućom porukom
-    res.status(200).json({ message: "Post je lajkovan." });
+    res.status(200).json({ message: "Post je lajkovan.", success: true });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Došlo je do greške." });
