@@ -7,6 +7,7 @@ const PostModel = require("../../models/PostsModal");
 const GeolocationModel = require("../../models/GeolocationModel ");
 const verifyToken = require("../../middleware/authMiddleware");
 router.use(cors());
+router.use(express.json());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -34,8 +35,8 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
 
     // Create a new post document with the associated user ID
     const newPost = new PostModel({
-      title: req.body.title,
-      content: req.body.content,
+      title: req.body.title, // Dobijamo naslov iz tela zahteva
+      content: req.body.content, // Dobijamo sadržaj iz tela zahteva
       imageUrl: imageUrl,
       userId: userId, // Associate the post with the logged-in user
     });
