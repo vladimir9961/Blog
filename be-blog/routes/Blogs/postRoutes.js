@@ -1,25 +1,42 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
+const fs = require("fs");
+const multer = require("multer");
 const PostModel = require("../../models/PostsModal");
-const GeolocationModel = require("../../models/GeolocationModel");
+const GeolocationModel = require("../../models/GeolocationModel ");
 const verifyToken = require("../../middleware/authMiddleware");
 router.use(cors());
 
-// Create a POST endpoint to add data to posts.json with base64 image
-router.post("/posts", verifyToken, async (req, res) => {
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/images");
+  },
+  filename: function (req, file, cb) {
+    const timestamp = Date.now();
+    const filename = timestamp + "-" + file.originalname;
+    cb(null, filename);
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 400000 },
+});
+// Create a POST endpoint to add data to posts.json
+router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
-    // Handle base64 encoded image here
-    const base64Image = req.body.image; // Pretpostavljamo da klijent šalje base64 sliku
+    // Handle image file (req.file) here as needed
+    const imageUrl = req.file ? "/images/" + req.file.filename : null;
 
     // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
 
-    // Create a new post document with the associated user ID and base64 image
+    // Create a new post document with the associated user ID
     const newPost = new PostModel({
       title: req.body.title,
       content: req.body.content,
-      image: base64Image, // Smeštamo base64 sliku
+      imageUrl: imageUrl,
       userId: userId, // Associate the post with the logged-in user
     });
 
