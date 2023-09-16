@@ -27,13 +27,10 @@ const upload = multer({
 router.post(
   "/posts",
   verifyToken,
-  upload.single("imageUrl"),
+  upload.single("image"), // Assuming the field name in your form is "image"
   async (req, res) => {
     try {
-      // Koristite binarne podatke slike iz req.file.buffer
       const image = req.file ? req.file.buffer : null;
-
-      console.log("Binary image data:", image); // This line displays binary image data
 
       // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
       const userId = req.user.userId;
@@ -42,7 +39,10 @@ router.post(
       const newPost = new PostModel({
         title: req.body.title,
         content: req.body.content,
-        imageUrl: image, // Koristite binarne podatke slike umesto imageUrl
+        image: {
+          data: image, // Store binary image data
+          contentType: req.file.mimetype, // Store the content type of the image
+        },
         userId: userId, // Associate the post with the logged-in user
       });
 
@@ -51,7 +51,7 @@ router.post(
 
       res.json({
         message: "Post added successfully",
-        postId: savedPost._id, // Assuming _id is the generated ID
+        postId: savedPost._id,
       });
     } catch (error) {
       console.error(error);
