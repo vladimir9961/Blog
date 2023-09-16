@@ -9,6 +9,7 @@ const editPost = require("./Blogs/editPost");
 const getPostById = require("./Blogs/getBlogById");
 const likePost = require("./Blogs/likePost");
 const commentPost = require("./Blogs/commentPost");
+const addImage = require("./Blogs/addImage");
 
 router.use(getRoutes);
 router.use(postRoutes);
@@ -17,6 +18,7 @@ router.use(editPost);
 router.use(getPostById);
 router.use(likePost);
 router.use(commentPost);
+router.use(addImage);
 
 //Users
 const userRoutes = require("./userRoutes");
