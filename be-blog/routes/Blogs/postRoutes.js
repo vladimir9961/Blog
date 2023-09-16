@@ -28,9 +28,8 @@ const upload = multer({
 
 router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
   try {
-    // Koristi imageUrl iz tela zahteva, ako postoji, inače koristi generisanu vrednost od Multer-a
-    const imageUrl =
-      req.body.imageUrl || (req.file ? "/images/" + req.file.filename : "");
+    // Koristite binarne podatke slike iz req.file.buffer
+    const image = req.file ? req.file.buffer : null;
 
     // Get the user's ID from the decoded token (assuming you're using JWT for authentication)
     const userId = req.user.userId;
@@ -39,7 +38,7 @@ router.post("/posts", verifyToken, upload.single("image"), async (req, res) => {
     const newPost = new PostModel({
       title: req.body.title,
       content: req.body.content,
-      imageUrl: imageUrl,
+      image: image, // Koristite binarne podatke slike umesto imageUrl
       userId: userId, // Associate the post with the logged-in user
     });
 
