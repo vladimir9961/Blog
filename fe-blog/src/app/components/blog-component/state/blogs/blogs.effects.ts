@@ -2,20 +2,24 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 import * as BlogActions from './blogs.actions';
 import { BlogsService } from 'src/app/shared/service/blogs/blogs.service';
-import { Blog } from 'src/app/shared/models/blog.model'; // Import your Blog type
+import { Blog } from 'src/app/shared/models/blog.model';
 
 @Injectable()
 export class BlogEffects {
   constructor(private actions$: Actions, private blogService: BlogsService) {}
 
-  formatRelativeTime(timestamp: string): string {
+  formatRelativeTime(timestamp: string | null): any {
+    if (!timestamp) {
+      return 'Timestamp is null';
+    }
+
     try {
-      const createdAt = moment(timestamp, 'YYYY-MM-DDTHH:mm:ss.SSSZ');
-      if (createdAt.isValid()) {
-        return createdAt.fromNow();
+      const createdAt = DateTime.fromISO(timestamp);
+      if (createdAt.isValid) {
+        return createdAt.toRelative();
       } else {
         return 'Invalid timestamp';
       }
