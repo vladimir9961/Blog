@@ -25,11 +25,6 @@ router.use(getComments);
 
 // router.use(addImage);
 // router.use(getImage);
-app.use((req, res, next) => {
-  const origin = req.get("origin");
-  console.log("Origin:", origin); // Dodajte ovu liniju za praćenje origin-a
-  next();
-});
 //Users
 const userRoutes = require("./userRoutes");
 const registerUser = require("../user/register");
