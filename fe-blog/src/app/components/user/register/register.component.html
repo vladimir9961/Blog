@@ -1,83 +1,78 @@
 <div class="container center-form">
-  <div class="row">
-    <div class="col-md-12">
-      <form class="custom-form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            formControlName="email"
-          />
-          <span
-            *ngIf="
-              emailForm.get('email')?.hasError('required') &&
-              emailForm.get('email')?.touched
-            "
-            class="invalid-feedback"
-          >
-            Email is required.</span
-          >
-          <span
-            *ngIf="
-              emailForm.get('email')?.hasError('email') &&
-              emailForm.get('email')?.touched
-            "
-            class="invalid-feedback"
-          >
-            Email not valid.</span
-          >
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Username </label>
-          <input
-            type="username"
-            class="form-control"
-            aria-describedby="username"
-            formControlName="username"
-          />
-          <span
-            *ngIf="
-              emailForm.get('username')?.hasError('required') &&
-              emailForm.get('username')?.touched
-            "
-            class="invalid-feedback"
-          >
-            Username is required.</span
-          >
-          <div
-            *ngIf="
-              (emailForm.get('username')?.hasError('minlength') ||
-                emailForm.get('username')?.hasError('required')) &&
-              emailForm.get('username')?.touched
-            "
-            class="invalid-feedback"
-          >
-            Username must be at least 4 characters long.
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            formControlName="password"
-          />
-        </div>
+  <form class="form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+    <p class="title">Register</p>
+    <p class="message">Signup now and get full access to our app.</p>
+    <label>
+      <input
+        required=""
+        placeholder=""
+        type="text"
+        class="input"
+        formControlName="username"
+      />
+      <span>Username</span>
+      <span
+        *ngIf="
+          emailForm.get('username')?.hasError('required') &&
+          emailForm.get('username')?.touched
+        "
+        class="invalid-feedback"
+      >
+        Username is required.</span
+      >
+      <div
+        *ngIf="
+          (emailForm.get('username')?.hasError('minlength') ||
+            emailForm.get('username')?.hasError('required')) &&
+          emailForm.get('username')?.touched
+        "
+        class="invalid-feedback"
+      >
+        Username must be at least 4 characters long.
+      </div>
+    </label>
+    <label>
+      <input
+        required=""
+        placeholder=""
+        type="email"
+        class="input"
+        formControlName="email"
+      />
+      <span>Email</span>
+      <span
+        *ngIf="
+          emailForm.get('email')?.hasError('required') &&
+          emailForm.get('email')?.touched
+        "
+        class="invalid-feedback"
+      >
+        Email is required.</span
+      >
+      <span
+        *ngIf="
+          emailForm.get('email')?.hasError('email') &&
+          emailForm.get('email')?.touched
+        "
+        class="invalid-feedback"
+      >
+        Email not valid.</span
+      >
+    </label>
 
-        <button
-          type="submit"
-          class="btn btn-primary custom-btn-primary"
-          [disabled]="!emailForm.valid"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
+    <label>
+      <input
+        required=""
+        placeholder=""
+        type="password"
+        class="input"
+        formControlName="password"
+      />
+      <span>Password</span>
+    </label>
+    <button class="submit" type="submit" [disabled]="!emailForm.valid">
+      Submit
+    </button>
+    <p class="signin">Already have an acount ? <a href="#">Signin</a></p>
+  </form>
 </div>

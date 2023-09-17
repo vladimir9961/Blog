@@ -14,10 +14,12 @@ const initialState: BlogState = {
   error: null,
 };
 export interface Like {
+  message: string;
   blogId: string;
   loading: boolean;
 }
 const initialStateLike: Like = {
+  message: '',
   blogId: '',
   loading: false,
 };
@@ -38,11 +40,29 @@ export const blogReducer = createReducer(
     loading: false,
   }))
 );
-export const likeReducer = createReducer(
+export const dislikeReducer = createReducer(
   initialStateLike,
-  on(BlogActions.dislakeBlog, (state, { blogId }) => ({
+  on(BlogActions.dislikeBlog, (state, { blogId }) => ({
     ...state,
     blogId,
+    loading: true,
+  })),
+  on(BlogActions.dislikeBlogSuccess, (state, message: any) => ({
+    ...state,
+    message,
+    loading: false,
+  }))
+);
+export const likeReducer = createReducer(
+  initialStateLike,
+  on(BlogActions.likeBlog, (state, { blogId }) => ({
+    ...state,
+    blogId,
+    loading: true,
+  })),
+  on(BlogActions.likeBlogSuccess, (state, message: any) => ({
+    ...state,
+    message,
     loading: true,
   }))
 );

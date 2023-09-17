@@ -32,9 +32,10 @@ export class BlogsComponent implements OnInit {
     const isChecked = event.target.checked;
     if (isChecked === false) {
       console.log(isChecked, blogId);
-      this.store.dispatch(BlogActions.dislakeBlog({ blogId }));
+      this.store.dispatch(BlogActions.dislikeBlog({ blogId }));
     } else {
       console.log(isChecked, blogId);
+      this.store.dispatch(BlogActions.likeBlog({ blogId }));
     }
   }
   goToEditPage(id: string): void {

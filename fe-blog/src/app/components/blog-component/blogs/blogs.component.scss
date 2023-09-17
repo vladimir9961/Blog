@@ -16,7 +16,7 @@ img {
 .card {
   display: flex;
   flex-direction: column;
-  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  width: 600px;
   overflow: hidden;
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 1em;
@@ -100,7 +100,7 @@ img {
 }
 
 .heart-container {
-  --heart-color: rgb(255, 91, 137);
+  --heart-color: rgb(141 141 141);
   position: relative;
   width: 20px;
   height: 20px;

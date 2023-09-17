@@ -13,7 +13,10 @@ export class BlogsService {
   getBlogs(): Observable<any> {
     return this.http.get(`${this.apiUrl}/posts`);
   }
-  likeBlog(blogId: string): Observable<any> {
+  dislakeBlog(blogId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/posts/${blogId}/like`);
+  }
+  likeBlog(blogId: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/posts/${blogId}/like`, {});
   }
 }

@@ -16,11 +16,19 @@ export const loadBlogsByUserId = createAction(
   '[Blog] Load Blogs By User Id',
   props<{ userId: string }>()
 );
-export const dislakeBlog = createAction(
-  '[Dislike] Like Blog',
+export const likeBlog = createAction(
+  '[Like] Like Blog',
   props<{ blogId: string }>()
 );
-export const dislakeBlogSuccess = createAction(
-  '[Dislike Succes] Dislike Succes Blog',
+export const likeBlogSuccess = createAction(
+  '[Like Success] Like Success Blog',
+  props<{ message: any }>()
+);
+export const dislikeBlog = createAction(
+  '[Dislike] Dislike Blog',
+  props<{ blogId: string }>()
+);
+export const dislikeBlogSuccess = createAction(
+  '[Dislike Success] Dislike Success Blog',
   props<{ message: any }>()
 );

@@ -7,6 +7,7 @@ import * as BlogActions from './blogs.actions';
 import { BlogsService } from 'src/app/shared/service/blogs/blogs.service';
 import { Blog } from 'src/app/shared/models/blog.model';
 import { UserService } from 'src/app/shared/service/user/user.service';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class BlogEffects {
@@ -14,7 +15,8 @@ export class BlogEffects {
   constructor(
     private actions$: Actions,
     private blogService: BlogsService,
-    private userService: UserService
+    private userService: UserService,
+    private store: Store
   ) {
     this.userId = this.userService.getUserId();
   }
@@ -63,13 +65,25 @@ export class BlogEffects {
   );
   DislakeBlog$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BlogActions.dislakeBlog),
+      ofType(BlogActions.dislikeBlog),
+      mergeMap((action) =>
+        this.blogService.dislakeBlog(action.blogId).pipe(
+          map((blog) => {
+            this.store.dispatch(BlogActions.loadBlogs());
+            return BlogActions.dislikeBlogSuccess(blog);
+          })
+        )
+      )
+    )
+  );
+  LikeBlog$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.likeBlog),
       mergeMap((action) =>
         this.blogService.likeBlog(action.blogId).pipe(
           map((blog) => {
-            console.log(blog);
-
-            return BlogActions.dislakeBlogSuccess(blog);
+            this.store.dispatch(BlogActions.loadBlogs());
+            return BlogActions.likeBlogSuccess(blog);
           })
         )
       )
