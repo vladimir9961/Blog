@@ -5,6 +5,8 @@ const UserModel = require("../../models/UserModel");
 // Create a GET endpoint to fetch posts data from MongoDB
 
 router.get("/posts", async (req, res) => {
+  const origin = req.get("origin");
+  console.log("Origin:", origin);
   try {
     // Fetch all posts from the MongoDB collection, uključujući i komentare
     const posts = await PostModel.find().populate("comments"); // Korišćenje populate za uključivanje komentara
