@@ -8,7 +8,7 @@ import { BlogResolver } from '../../blogs/blogs.resolver';
 @NgModule({
   imports: [
     StoreModule.forFeature('blogs', blogReducer),
-    StoreModule.forFeature('like', likeReducer),
+    StoreModule.forFeature('dislakes', likeReducer),
     EffectsModule.forFeature([BlogEffects]),
   ],
   declarations: [],

@@ -61,15 +61,17 @@ export class BlogEffects {
       )
     )
   );
-  likeBlog$ = createEffect(() =>
+  DislakeBlog$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BlogActions.likeBlog),
+      ofType(BlogActions.dislakeBlog),
       mergeMap((action) =>
-        this.blogService
-          .likeBlog(action.blogId)
-          .pipe(
-            map(() => BlogActions.likeBlogSuccess({ blogId: action.blogId }))
-          )
+        this.blogService.likeBlog(action.blogId).pipe(
+          map((blog) => {
+            console.log(blog);
+
+            return BlogActions.dislakeBlogSuccess(blog);
+          })
+        )
       )
     )
   );

@@ -40,7 +40,7 @@ export const blogReducer = createReducer(
 );
 export const likeReducer = createReducer(
   initialStateLike,
-  on(BlogActions.likeBlog, (state, { blogId }) => ({
+  on(BlogActions.dislakeBlog, (state, { blogId }) => ({
     ...state,
     blogId,
     loading: true,
