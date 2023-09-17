@@ -1,9 +1,13 @@
+import { Likes } from 'src/app/shared/models/blog.model';
+
 export interface Blog {
-  _id: string;
+  post_id: string;
   title: string;
   content: string;
   imageUrl: string;
   userId: string;
   username: string;
+  likes: Likes[];
   created_at: string;
+  liked: boolean;
 }

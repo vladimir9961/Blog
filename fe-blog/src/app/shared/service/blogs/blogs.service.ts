@@ -13,4 +13,7 @@ export class BlogsService {
   getBlogs(): Observable<any> {
     return this.http.get(`${this.apiUrl}/posts`);
   }
+  likeBlog(blogId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/posts/${blogId}/like`);
+  }
 }

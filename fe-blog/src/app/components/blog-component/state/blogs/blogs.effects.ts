@@ -6,10 +6,18 @@ import { DateTime } from 'luxon';
 import * as BlogActions from './blogs.actions';
 import { BlogsService } from 'src/app/shared/service/blogs/blogs.service';
 import { Blog } from 'src/app/shared/models/blog.model';
+import { UserService } from 'src/app/shared/service/user/user.service';
 
 @Injectable()
 export class BlogEffects {
-  constructor(private actions$: Actions, private blogService: BlogsService) {}
+  userId: string | null;
+  constructor(
+    private actions$: Actions,
+    private blogService: BlogsService,
+    private userService: UserService
+  ) {
+    this.userId = this.userService.getUserId();
+  }
 
   formatRelativeTime(timestamp: string | null): any {
     if (!timestamp) {
@@ -35,24 +43,33 @@ export class BlogEffects {
       mergeMap(() =>
         this.blogService.getBlogs().pipe(
           map((blogs: Blog[]) => {
-            const blogsWithFormattedTime = blogs.map((blog) => ({
+            const likedAndCreatedAt = blogs.map((blog, index) => ({
               ...blog,
-              created_at: this.formatRelativeTime(blog.created_at),
+              liked: blog.likes.some((like) => like.userId === this.userId),
+              created_at: this.formatRelativeTime(blogs[index].created_at),
             }));
-
-            localStorage.setItem(
-              'blogs',
-              JSON.stringify(blogsWithFormattedTime)
-            );
+            localStorage.setItem('blogs', JSON.stringify(likedAndCreatedAt));
 
             return BlogActions.loadBlogsSuccess({
-              blogs: blogsWithFormattedTime,
+              blogs: likedAndCreatedAt,
             });
           }),
           catchError((error) =>
             of(BlogActions.loadBlogsFailure({ error: error.message }))
           )
         )
+      )
+    )
+  );
+  likeBlog$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.likeBlog),
+      mergeMap((action) =>
+        this.blogService
+          .likeBlog(action.blogId)
+          .pipe(
+            map(() => BlogActions.likeBlogSuccess({ blogId: action.blogId }))
+          )
       )
     )
   );

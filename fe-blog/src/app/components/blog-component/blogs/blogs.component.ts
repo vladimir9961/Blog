@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import * as BlogSelectors from '../state/blogs/blogs.selectors';
 import { Router } from '@angular/router';
-import { Blog } from 'src/app/shared/models/blog.model';
+import { Blog, Likes } from 'src/app/shared/models/blog.model';
 import { UserService } from 'src/app/shared/service/user/user.service';
+import * as BlogActions from '../state/blogs/blogs.actions';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -26,14 +27,17 @@ export class BlogsComponent implements OnInit {
     this.error$ = this.store.select(BlogSelectors.selectError);
     this.userId = this.userService.getUserId();
   }
-
-  ngOnInit(): void {
-    this.blogs$.subscribe((blogsSelect) => {
-      console.log(blogsSelect);
-    });
+  ngOnInit(): void {}
+  onCheckboxChange(event: any, blogId: string) {
+    const isChecked = event.target.checked;
+    if (isChecked === false) {
+      console.log(isChecked, blogId);
+      this.store.dispatch(BlogActions.likeBlog({ blogId }));
+    } else {
+      console.log(isChecked, blogId);
+    }
   }
   goToEditPage(id: string): void {
-    console.log(id);
     this.router.navigate(['/posts/' + id]);
   }
 }

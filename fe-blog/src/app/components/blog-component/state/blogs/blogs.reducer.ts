@@ -13,7 +13,11 @@ const initialState: BlogState = {
   loading: false,
   error: null,
 };
-const initialStateLike = {
+export interface Like {
+  blogId: string;
+  loading: boolean;
+}
+const initialStateLike: Like = {
   blogId: '',
   loading: false,
 };
@@ -36,8 +40,9 @@ export const blogReducer = createReducer(
 );
 export const likeReducer = createReducer(
   initialStateLike,
-  on(BlogActions.likeBlog, (state) => ({
+  on(BlogActions.likeBlog, (state, { blogId }) => ({
     ...state,
+    blogId,
     loading: true,
   }))
 );

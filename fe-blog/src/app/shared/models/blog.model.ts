@@ -1,9 +1,16 @@
+export interface Likes {
+  userId: string;
+  post_id: string;
+}
+
 export interface Blog {
-  _id: string;
+  post_id: string;
   title: string;
   content: string;
   imageUrl: string;
   userId: string;
   username: string;
   created_at: string;
+  likes: Likes[];
+  liked: boolean;
 }

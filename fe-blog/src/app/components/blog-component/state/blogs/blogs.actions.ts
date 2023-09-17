@@ -20,3 +20,7 @@ export const likeBlog = createAction(
   '[Like] Like Blog',
   props<{ blogId: string }>()
 );
+export const likeBlogSuccess = createAction(
+  '[Like] Like Blog',
+  props<{ blogId: string }>()
+);
