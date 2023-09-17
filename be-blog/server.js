@@ -8,6 +8,7 @@ app.use(express.json());
 const allowedOrigins = [
   "https://blog-five-pi-59.vercel.app",
   "http://localhost:4200",
+  "https://erin-awful-turkey.cyclic.cloud",
 ];
 app.use(
   cors({
