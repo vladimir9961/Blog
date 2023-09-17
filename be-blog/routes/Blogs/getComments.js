@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const CommentModel = require("../../models/CommentModel"); // Pretpostavljam da imate model za komentare
-
+const PostModel = require("../../models/PostsModal");
 router.get("/posts/:postId/comments", async (req, res) => {
   try {
     const postId = req.params.postId;
 
     // Prikupite komentare za određeni post koristeći postId
-    const comments = await CommentModel.find({ postId });
+    const post = await PostModel.findById(postId).populate("comments");
+
+    if (!post) {
+      return res.status(404).json({ error: "Post nije pronađen." });
+    }
+
+    const comments = post.comments;
 
     // Vratite komentare kao JSON odgovor
     res.json(comments);
