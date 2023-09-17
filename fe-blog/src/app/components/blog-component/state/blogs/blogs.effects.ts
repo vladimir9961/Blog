@@ -50,7 +50,7 @@ export class BlogEffects {
               liked: blog.likes.some((like) => like.userId === this.userId),
               created_at: this.formatRelativeTime(blogs[index].created_at),
             }));
-            localStorage.setItem('blogs', JSON.stringify(likedAndCreatedAt));
+            // localStorage.setItem('blogs', JSON.stringify(likedAndCreatedAt));
 
             return BlogActions.loadBlogsSuccess({
               blogs: likedAndCreatedAt,
@@ -84,6 +84,20 @@ export class BlogEffects {
           map((blog) => {
             this.store.dispatch(BlogActions.loadBlogs());
             return BlogActions.likeBlogSuccess(blog);
+          })
+        )
+      )
+    )
+  );
+  AddComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.addComment),
+      mergeMap((action) =>
+        this.blogService.addComment(action.blogId, action.text).pipe(
+          map((comment) => {
+            console.log(comment);
+
+            return BlogActions.addCommentSuccess(comment);
           })
         )
       )

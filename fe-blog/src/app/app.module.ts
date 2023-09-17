@@ -34,12 +34,12 @@ import { BlogModalComponent } from './components/blog-component/blog-modal/blog-
     EditBlogComponent,
   ],
   imports: [
+    CommonModule,
     BlogModalComponent,
     BrowserModule,
     AppRoutingModule,
     UserModule,
     FormsModule,
-    CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

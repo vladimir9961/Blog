@@ -19,4 +19,7 @@ export class BlogsService {
   likeBlog(blogId: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/posts/${blogId}/like`, {});
   }
+  addComment(blogId: string, text: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/posts/${blogId}/comments`, { text });
+  }
 }

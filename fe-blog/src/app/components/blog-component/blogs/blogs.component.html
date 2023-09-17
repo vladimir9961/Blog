@@ -80,7 +80,11 @@
             </div>
           </div>
           <div class="comments-container" (click)="openModal(blog)">
-            <app-blog-modal [blog]="selectedBlog"></app-blog-modal>
+            <app-blog-modal
+              [blog]="selectedBlog"
+              [comments]="comments"
+            ></app-blog-modal>
+            <small>{{ blog.comments.length }}</small>
           </div>
         </div>
       </div>

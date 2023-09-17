@@ -3,10 +3,9 @@ import { Store } from '@ngrx/store';
 import { Observable, pipe } from 'rxjs';
 import * as BlogSelectors from '../state/blogs/blogs.selectors';
 import { Router } from '@angular/router';
-import { Blog, Likes } from 'src/app/shared/models/blog.model';
+import { Blog, Comment } from 'src/app/shared/models/blog.model';
 import { UserService } from 'src/app/shared/service/user/user.service';
 import * as BlogActions from '../state/blogs/blogs.actions';
-import { BlogModalComponent } from '../blog-modal/blog-modal.component';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -18,6 +17,7 @@ export class BlogsComponent implements OnInit {
   error$: Observable<string | null>;
   userId: string | null;
   selectedBlog: Blog | null = null;
+  comments: any;
   constructor(
     private store: Store,
     private router: Router,
@@ -41,6 +41,7 @@ export class BlogsComponent implements OnInit {
   }
   openModal(blog: Blog) {
     this.selectedBlog = blog;
+    this.comments = blog.comments;
   }
   goToEditPage(id: string): void {
     this.router.navigate(['/posts/' + id]);

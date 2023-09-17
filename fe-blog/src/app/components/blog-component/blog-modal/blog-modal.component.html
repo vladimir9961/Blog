@@ -38,16 +38,34 @@
             </p>
           </div>
           <div class="comments">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <ul class="comment-container" *ngFor="let comment of comments">
+              <li class="comment">
+                <div class="wrap">
+                  <div class="wrap-user">
+                    <div class="user-avatar">
+                      <img src="../../../../assets/icons/user.png" alt="" />
+                    </div>
+                  </div>
+                  <div class="data">
+                    <h5>{{ comment.username }}</h5>
+                    <p>
+                      {{ comment.text }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="add-comment">
+            <form [formGroup]="CommentForm" (ngSubmit)="onSubmit()">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Add comment"
+                aria-label="Add comment"
+                formControlName="comment"
+              />
+            </form>
           </div>
         </div>
       </div>

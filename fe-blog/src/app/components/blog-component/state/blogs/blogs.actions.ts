@@ -32,3 +32,11 @@ export const dislikeBlogSuccess = createAction(
   '[Dislike Success] Dislike Success Blog',
   props<{ message: any }>()
 );
+export const addComment = createAction(
+  '[Add Comment] Add Comment',
+  props<{ blogId: string; text: string }>()
+);
+export const addCommentSuccess = createAction(
+  '[Add Comment Success] Add Comment Success',
+  props<{ message: any }>()
+);

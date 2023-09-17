@@ -9,6 +9,8 @@ const editPost = require("./Blogs/editPost");
 const getPostById = require("./Blogs/getBlogById");
 const likePost = require("./Blogs/likePost");
 const commentPost = require("./Blogs/commentPost");
+const getComments = require("./Blogs/getComments");
+
 // const addImage = require("./Blogs/addImage");
 // const getImage = require("./Blogs/getImage");
 
@@ -19,6 +21,8 @@ router.use(editPost);
 router.use(getPostById);
 router.use(likePost);
 router.use(commentPost);
+router.use(getComments);
+
 // router.use(addImage);
 // router.use(getImage);
 

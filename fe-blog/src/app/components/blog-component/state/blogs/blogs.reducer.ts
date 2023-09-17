@@ -23,6 +23,16 @@ const initialStateLike: Like = {
   blogId: '',
   loading: false,
 };
+export interface AddComment {
+  text: string;
+  blogId: string;
+  loading: boolean;
+}
+const initialStateComment: AddComment = {
+  text: '',
+  blogId: '',
+  loading: false,
+};
 export const blogReducer = createReducer(
   initialState,
   on(BlogActions.loadBlogs, (state) => ({
@@ -63,6 +73,20 @@ export const likeReducer = createReducer(
   on(BlogActions.likeBlogSuccess, (state, message: any) => ({
     ...state,
     message,
+    loading: false,
+  }))
+);
+export const addCommentReducer = createReducer(
+  initialStateComment,
+  on(BlogActions.addComment, (state, { blogId, text }) => ({
+    ...state,
+    blogId,
+    text,
     loading: true,
+  })),
+  on(BlogActions.addCommentSuccess, (state, message: any) => ({
+    ...state,
+    message,
+    loading: false,
   }))
 );

@@ -95,6 +95,10 @@ img {
       align-items: center;
     }
   }
+  .comments-container {
+    display: flex;
+    gap: 5px;
+  }
   small {
     color: #666;
   }
