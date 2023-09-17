@@ -24,7 +24,6 @@ router
   })
   .delete(verifyToken, async (req, res) => {
     const postId = req.params.postId;
-    const isLike = req.body.isLike; // True za lajkiranje, false za dislajkiranje
 
     try {
       // Pronađite post sa datim postId
@@ -42,18 +41,14 @@ router
         (dislike) => dislike.userId.toString() === req.user.userId
       );
 
-      if (isLike && likedIndex === -1) {
+      if (likedIndex === -1 && dislikedIndex === -1) {
         return res
           .status(400)
-          .json({ error: "Korisnik nije lajkovao ovaj post." });
-      } else if (!isLike && dislikedIndex === -1) {
-        return res
-          .status(400)
-          .json({ error: "Korisnik nije dislajkovao ovaj post." });
+          .json({ error: "Korisnik nije lajkovao ili dislajkovao ovaj post." });
       }
 
-      // Ako je isLike true, uklonite lajk, inače uklonite dislajk
-      if (isLike) {
+      // Ako je korisnik lajkovao post, uklonite lajk, inače uklonite dislajk
+      if (likedIndex !== -1) {
         post.likes.splice(likedIndex, 1);
       } else {
         post.dislikes.splice(dislikedIndex, 1);
