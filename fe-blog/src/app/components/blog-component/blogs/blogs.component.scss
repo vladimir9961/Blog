@@ -85,7 +85,16 @@ img {
   align-content: center;
   align-items: center;
   padding: 0 2px;
-  gap: 5px;
+  gap: 1rem;
+  .likes-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .comments-container {
+      display: flex;
+      align-items: center;
+    }
+  }
   small {
     color: #666;
   }
