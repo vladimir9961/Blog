@@ -23,6 +23,7 @@ import { AuthTokenInterceptor } from './shared/service/AuthToken.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { BlogModalComponent } from './components/blog-component/blog-modal/blog-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { MatMenuModule } from '@angular/material/menu';
     EditBlogComponent,
   ],
   imports: [
+    BlogModalComponent,
     BrowserModule,
     AppRoutingModule,
     UserModule,

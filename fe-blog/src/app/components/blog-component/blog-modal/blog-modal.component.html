@@ -1,0 +1,64 @@
+<div
+  class="modal fade"
+  id="exampleModalToggle"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="exampleModalToggleLabel">
+          <h5>{{ blog?.username }}</h5>
+          <small>{{ blog?.created_at }}</small>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="card-user-image">
+          <img
+            src="https://source.unsplash.com/600x400/?car,automobile"
+            alt="card__image"
+            class="card__image"
+            width="600"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="footer-body">
+          <div class="content">
+            <h4 class="card-title">{{ blog?.title }}</h4>
+            <p>
+              {{ blog?.content }}
+            </p>
+          </div>
+          <div class="comments">
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  href="#exampleModalToggle"
+  role="button"
+  >Open first modal</a
+>

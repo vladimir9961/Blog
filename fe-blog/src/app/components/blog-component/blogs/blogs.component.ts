@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Blog, Likes } from 'src/app/shared/models/blog.model';
 import { UserService } from 'src/app/shared/service/user/user.service';
 import * as BlogActions from '../state/blogs/blogs.actions';
+import { BlogModalComponent } from '../blog-modal/blog-modal.component';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -16,7 +17,7 @@ export class BlogsComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
   userId: string | null;
-
+  selectedBlog: Blog | null = null;
   constructor(
     private store: Store,
     private router: Router,
@@ -37,6 +38,9 @@ export class BlogsComponent implements OnInit {
       console.log(isChecked, blogId);
       this.store.dispatch(BlogActions.likeBlog({ blogId }));
     }
+  }
+  openModal(blog: Blog) {
+    this.selectedBlog = blog;
   }
   goToEditPage(id: string): void {
     this.router.navigate(['/posts/' + id]);
