@@ -63,6 +63,18 @@ export class BlogEffects {
       )
     )
   );
+  getBlogById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.getBlogById),
+      mergeMap((action) =>
+        this.blogService.getBlogById(action.blogId).pipe(
+          map((blog) => {
+            return BlogActions.getBlogByIdSuccess(blog);
+          })
+        )
+      )
+    )
+  );
   DislakeBlog$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BlogActions.dislikeBlog),
@@ -87,6 +99,19 @@ export class BlogEffects {
           })
         )
       )
+    )
+  );
+  getComments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.getComments),
+      mergeMap((action) => {
+        const blogId = action.blogId;
+        return this.blogService.getComment(blogId).pipe(
+          map((comment) => {
+            return BlogActions.getCommentsSuccess({ message: comment });
+          })
+        );
+      })
     )
   );
   AddComment$ = createEffect(() =>

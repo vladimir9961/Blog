@@ -7,12 +7,13 @@ export interface BlogState {
   loading: boolean;
   error: string | null;
 }
-
+const singleBlogState = {};
 const initialState: BlogState = {
   blogs: [],
   loading: false,
   error: null,
 };
+
 export interface Like {
   message: string;
   blogId: string;
@@ -23,12 +24,22 @@ const initialStateLike: Like = {
   blogId: '',
   loading: false,
 };
+export interface CommentUser {
+  _id: string;
+  username: string;
+}
 export interface AddComment {
   text: string;
   blogId: string;
   loading: boolean;
 }
-const initialStateComment: AddComment = {
+export interface GetComment {
+  _id: string;
+}
+const initialStateGetComments: GetComment = {
+  _id: '',
+};
+const initialStateAddComment: AddComment = {
   text: '',
   blogId: '',
   loading: false,
@@ -47,6 +58,27 @@ export const blogReducer = createReducer(
   on(BlogActions.loadBlogsFailure, (state, { error }) => ({
     ...state,
     error,
+    loading: false,
+  }))
+);
+export interface SingleBlogState {
+  blog: any;
+  loading: boolean;
+}
+
+const initialStateGetBlog: SingleBlogState = {
+  blog: [],
+  loading: false,
+};
+export const getBlogByIdReducer = createReducer(
+  initialStateGetBlog,
+  on(BlogActions.getBlogById, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(BlogActions.getBlogByIdSuccess, (state, blog) => ({
+    ...state,
+    blog,
     loading: false,
   }))
 );
@@ -76,8 +108,22 @@ export const likeReducer = createReducer(
     loading: false,
   }))
 );
+export const getCommentsReducer = createReducer(
+  initialStateGetComments,
+  on(BlogActions.getComments, (state, { blogId }) => ({
+    ...state,
+    blogId,
+    loading: true,
+  })),
+  on(BlogActions.getCommentsSuccess, (state, { message }) => ({
+    ...state,
+    message,
+    loading: false,
+  }))
+);
+
 export const addCommentReducer = createReducer(
-  initialStateComment,
+  initialStateAddComment,
   on(BlogActions.addComment, (state, { blogId, text }) => ({
     ...state,
     blogId,

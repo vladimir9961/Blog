@@ -16,8 +16,9 @@ export class BlogsComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
   userId: string | null;
-  selectedBlog: Blog | null = null;
-  comments: any;
+  selectedBlog: string = '';
+  isModal: boolean = false;
+  blogId: any;
   constructor(
     private store: Store,
     private router: Router,
@@ -28,6 +29,7 @@ export class BlogsComponent implements OnInit {
     this.error$ = this.store.select(BlogSelectors.selectError);
     this.userId = this.userService.getUserId();
   }
+
   ngOnInit(): void {}
   onCheckboxChange(event: any, blogId: string) {
     const isChecked = event.target.checked;
@@ -39,11 +41,22 @@ export class BlogsComponent implements OnInit {
       this.store.dispatch(BlogActions.likeBlog({ blogId }));
     }
   }
-  openModal(blog: Blog) {
-    this.selectedBlog = blog;
-    this.comments = blog.comments;
+  openModal(blog: any) {
+    this.blogId = blog;
+    // console.log(blog);
+
+    // if (blog === this.test || this.isModal) {
+    //   this.isModal = false;
+    //   this.selectedBlog = '';
+    // } else {
+    //   this.selectedBlog = blog;
+    //   this.isModal = true;
+    // }
   }
   goToEditPage(id: string): void {
     this.router.navigate(['/posts/' + id]);
+  }
+  trackById(index: any, item: any) {
+    return index;
   }
 }

@@ -5,12 +5,11 @@
   aria-labelledby="exampleModalToggleLabel"
   tabindex="-1"
 >
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered" *ngIf="blog$ | async as blog">
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title" id="exampleModalToggleLabel">
-          <h5>{{ blog?.username }}</h5>
-          <small>{{ blog?.created_at }}</small>
+          <h5>{{ blog.author }}</h5>
         </div>
         <button
           type="button"
@@ -32,13 +31,16 @@
       <div class="modal-footer">
         <div class="footer-body">
           <div class="content">
-            <h4 class="card-title">{{ blog?.title }}</h4>
+            <h4 class="card-title">{{ blog.title }}</h4>
             <p>
-              {{ blog?.content }}
+              {{ blog.content }}
             </p>
           </div>
           <div class="comments">
-            <ul class="comment-container" *ngFor="let comment of comments">
+            <ul
+              class="comment-container"
+              *ngFor="let comment of comments$ | async"
+            >
               <li class="comment">
                 <div class="wrap">
                   <div class="wrap-user">
@@ -47,7 +49,7 @@
                     </div>
                   </div>
                   <div class="data">
-                    <h5>{{ comment.username }}</h5>
+                    <h5>{{ comment.userId.username }}</h5>
                     <p>
                       {{ comment.text }}
                     </p>
@@ -73,10 +75,11 @@
   </div>
 </div>
 
-<a
+<!-- <a
   class="comments-btn"
   data-bs-toggle="modal"
   href="#exampleModalToggle"
   role="button"
+  (click)="getBlog()"
   ><img src="../../../../assets/icons/comments.png" alt="My PNG Image"
-/></a>
+/></a> -->

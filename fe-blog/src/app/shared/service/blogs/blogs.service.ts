@@ -13,11 +13,17 @@ export class BlogsService {
   getBlogs(): Observable<any> {
     return this.http.get(`${this.apiUrl}/posts`);
   }
+  getBlogById(blogId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/post/${blogId}`);
+  }
   dislakeBlog(blogId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/posts/${blogId}/like`);
   }
   likeBlog(blogId: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/posts/${blogId}/like`, {});
+  }
+  getComment(blogId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/posts/${blogId}/comments`);
   }
   addComment(blogId: string, text: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/posts/${blogId}/comments`, { text });

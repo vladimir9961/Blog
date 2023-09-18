@@ -19,4 +19,5 @@ export interface Blog {
   comments: Comment[];
   likes: Likes[];
   liked: boolean;
+  isOpened: boolean;
 }

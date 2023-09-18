@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card" *ngFor="let blog of blogs$ | async">
+  <div class="card" *ngFor="let blog of blogs$ | async; trackBy: trackById">
     <div class="card__header">
       <div class="card-user">
         <div class="user">
@@ -79,11 +79,17 @@
               <small>{{ blog.likes.length }}</small>
             </div>
           </div>
-          <div class="comments-container" (click)="openModal(blog)">
-            <app-blog-modal
-              [blog]="selectedBlog"
-              [comments]="comments"
-            ></app-blog-modal>
+          <div class="comments-container" (click)="openModal(blog.post_id)">
+            <a
+              class="comments-btn"
+              data-bs-toggle="modal"
+              href="#exampleModalToggle"
+              role="button"
+              ><img
+                class="comment-icon"
+                src="../../../../assets/icons/comments.png"
+                alt="My PNG Image"
+            /></a>
             <small>{{ blog.comments.length }}</small>
           </div>
         </div>
@@ -100,3 +106,5 @@
     </div>
   </div>
 </div>
+
+<app-blog-modal [blog]="selectedBlog" [openModale]="blogId"></app-blog-modal>

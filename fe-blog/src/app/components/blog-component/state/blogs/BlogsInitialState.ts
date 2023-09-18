@@ -11,4 +11,5 @@ export interface Blog {
   comments: Comment[];
   created_at: string;
   liked: boolean;
+  isOpened: boolean;
 }

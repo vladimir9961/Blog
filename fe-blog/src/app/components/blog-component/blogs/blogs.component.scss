@@ -98,6 +98,11 @@ img {
   .comments-container {
     display: flex;
     gap: 5px;
+    .comments-btn {
+      .comment-icon {
+        width: 25px;
+      }
+    }
   }
   small {
     color: #666;
