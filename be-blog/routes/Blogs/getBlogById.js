@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const PostModel = require("../../models/PostsModal");
-const UserModel = require("../../models/UserModal"); // Uvoz modela za korisnike
+const UserModel = require("../../models/UserModel"); // Uvoz modela za korisnike
 
 // GET a single post by ID
 router.get("/post/:id", async (req, res) => {
